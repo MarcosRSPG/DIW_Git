@@ -1,6 +1,7 @@
 #b1 {
     font-size: 50px;
     width: 300px;
+    height: 300px;
     border-width: 10px;
     border-style: groove;
     border-color: blue;
@@ -8,6 +9,7 @@
 #b2 {
     font-size: 50px;
     width: 300px;
+    height: 300px;
     border-width: 10px;
     border-style: dotted;
     border-color: red;
@@ -15,6 +17,7 @@
 #b3 {
     font-size: 50px;
     width: 300px;
+    height: 300px;
     border-width: 10px;
     border-style: solid;
     border-radius: 20px;
@@ -24,34 +27,46 @@
     font-size: 50px;
     background-color: aqua;
     width: 300px;
+    height: 300px;
     margin: 50px;
     padding: 50px;
-}
-.cl {
-    font-size: 50px;
-    background-color: yellow;
-    width: 300px;
-    margin-top: 10px;
 }
 p {
     font-size: 30px;
     color: purple;
-    width: 300px;
 }
+.cl {
+    font-size: 50px;
+    display:  inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+}
+.az {
+    background-color: lightskyblue;
+}
+.roj {
+    background-color: red;
+}
+
+.ver {
+    background-color: greenyellow;
+}
+
 .sq {
     list-style: square;
     font-size: 30px;
-    width: 300px;
 }
 .vi {
     list-style: none;
     font-size: 30px;
-    width: 300px;
 }
 .ca {
     font-size: 50px;
     background-color: orange;
     width: 300px;
+    height: 300px;
     margin-left: 20px;
     display: inline-block;
 }
@@ -59,6 +74,7 @@ p {
     font-size: 50px;
     background-color: violet;
     width: 300px;
+    height: 300px;
     position: absolute;
     top: 0%;
     right: 0%;
@@ -69,6 +85,7 @@ p {
     color: white;
     background-color: black;
     width: 300px;
+    height: 300px;
 }
 #ho:hover {
     color: black;
