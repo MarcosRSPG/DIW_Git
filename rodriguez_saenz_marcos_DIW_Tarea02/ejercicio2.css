@@ -1,12 +1,13 @@
-.link:hover {
-  color: green;
+.link:link {
+  color: blue;
 }
 .link:visited {
   color: red;
 }
-.link:link {
-  color: blue;
+.link:hover {
+  color: green;
 }
+
 h1 {
   font-family: sans-serif;
   font-size: 36px;
