@@ -8,9 +8,15 @@
   </head>
   <body>
     <ul>
-      <li><a href="https://www.google.com/?hl=es">Link a google</a></li>
-      <li><a href="https://dnd5e.wikidot.com/">Link a wikidot</a></li>
-      <li><a href="https://iescomercio.com/">Link a iescomercio</a></li>
+      <li>
+        <a class="link" href="https://www.google.com/?hl=es">Link a google</a>
+      </li>
+      <li>
+        <a class="link" href="https://dnd5e.wikidot.com/">Link a wikidot</a>
+      </li>
+      <li>
+        <a class="link" href="https://iescomercio.com/">Link a iescomercio</a>
+      </li>
     </ul>
     <br />
     <h1>Encabezado</h1>
@@ -102,31 +108,29 @@
       </h6>
     </div>
     <br />
-    <!-- 1) Interruptor oculto que guarda el estado del modal -->
     <input type="checkbox" id="modal-toggle" class="modal-toggle" hidden />
 
-    <!-- 2) Botón que ABRE el modal (realmente es un label que activa el checkbox) -->
     <label for="modal-toggle" class="btn-abrir-modal">Abrir modal</label>
 
-    <!-- 3) Contenedor del modal (overlay + caja) -->
     <div class="modal">
-      <!-- 3a) Fondo/overlay: al hacer click cierra el modal -->
       <label for="modal-toggle" class="modal-backdrop"></label>
 
-      <!-- 3b) Caja del modal -->
       <div class="modal-content">
         <div class="modal-header">
-          <h2 id="modal-titulo">Título del modal</h2>
-          <!-- Botón CERRAR (otra etiqueta que desactiva el checkbox) -->
+          <h2 id="modal-titulo">Título</h2>
           <label for="modal-toggle" class="modal-cerrar">×</label>
         </div>
 
         <div class="modal-body">
-          <p>Aquí va el contenido del modal.</p>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo..
+          </p>
         </div>
 
         <div class="modal-footer">
-          <!-- Otro botón para cerrar, por si quieres -->
           <label for="modal-toggle" class="btn-cerrar">Cerrar</label>
         </div>
       </div>
