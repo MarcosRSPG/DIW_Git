@@ -150,7 +150,6 @@ p {
   scale: 1.05;
   transition: scale 0.3s;
 }
-/* ====== Botón de apertura (puedes personalizarlo) ====== */
 .btn-abrir-modal {
   display: inline-block;
   padding: 8px 12px;
