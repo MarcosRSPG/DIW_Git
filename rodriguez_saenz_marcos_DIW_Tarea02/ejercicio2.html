@@ -108,32 +108,28 @@
       </h6>
     </div>
     <br />
-    <input type="checkbox" id="modal-toggle" class="modal-toggle" hidden />
-
-    <label for="modal-toggle" class="btn-abrir-modal">Abrir modal</label>
-
-    <div class="modal">
-      <label for="modal-toggle" class="modal-backdrop"></label>
-
+    <a href="#modal" id="modal-label" class="modal-label link">Abrir modal</a>
+    <div class="modal" id="modal">
+      <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="modal-header">
-          <h2 id="modal-titulo">Título</h2>
-          <label for="modal-toggle" class="modal-cerrar">×</label>
-        </div>
-
+        <a href="#modal-label" class="modal-close x">&times;</a>
+        <div class="modal-head"><h1>Modal</h1></div>
         <div class="modal-body">
           <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo..
-          </p>
+          Un modal es una ventana emergente que aparece sobre el contenido
+          principal de una página web, generalmente para captar la atención del
+          usuario y solicitar una acción específica, como completar un formulario
+          o confirmar una decisión. Los modales suelen deshabilitar la
+          interacción con el resto de la página hasta que se cierran, lo que los
+          hace útiles para tareas que requieren enfoque inmediato. Sin embargo,
+          su uso excesivo o inapropiado puede resultar intrusivo y afectar
+          negativamente la experiencia del usuario.
+        </p>
         </div>
-
         <div class="modal-footer">
-          <label for="modal-toggle" class="btn-cerrar">Cerrar</label>
+          <a href="#modal-label" class="modal-close cer">Cerrar</a>
         </div>
       </div>
-    </div>
+      <br />
   </body>
 </html>
