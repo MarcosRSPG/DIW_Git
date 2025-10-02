@@ -7,12 +7,14 @@ tr {
   padding: 10px;
 }
 .fila th {
+  background-color: lightblue;
   font-family: Arial;
   font-weight: normal;
   text-align: left;
 }
 .titulo th {
-  font-family: Cambria;
+  background-color: lightskyblue;
+  font-family: Arial;
   font-weight: bolder;
   font-style: oblique;
   text-align: center;
@@ -28,7 +30,7 @@ th:nth-child(3) {
   width: 30%;
 }
 .fila th:hover {
-  background-color: black;
+  background-color: darkblue;
   color: white;
 }
 .divtabla {
@@ -40,4 +42,13 @@ th:nth-child(3) {
 }
 .lista > li > ul {
   list-style-type: square;
+}
+h1 {
+  font-family: Arial;
+  font-weight: bolder;
+  font-style: oblique;
+  text-align: center;
+}
+body {
+  background-color: whitesmoke;
 }

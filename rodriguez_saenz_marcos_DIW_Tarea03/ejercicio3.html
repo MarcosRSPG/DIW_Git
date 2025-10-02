@@ -1,88 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ejercicio3.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="ejercicio3.css" />
     <title>Ejercicio 3</title>
-</head>
-<body>
-<div class="ej3_1">
+  </head>
+  <body>
+    <div class="ej3_1">
+      <hi>Ejercicio 3.1</hi>
+      <p>Herramientas utilizadas:</p>
+      <ul class="lista">
+        <li>
+          <span>Bordes</span>
+          <ul>
+            <li>border-collapse: collapse;</li>
+            <li>border: 5px groove black;</li>
+          </ul>
+        </li>
+
+        <li>
+          <span>Size</span>
+          <ul>
+            <li>width: 100%;</li>
+            <li>th:nth-child(1) { width: 65%; }</li>
+            <li>th:nth-child(2) { width: 5%; }</li>
+            <li>th:nth-child(3) { width: 30%; }</li>
+          </ul>
+        </li>
+
+        <li>
+          <span>Alineamiento</span>
+          <ul>
+            <li>text-align: left;</li>
+            <li>text-align: center;</li>
+          </ul>
+        </li>
+
+        <li>
+          <span>Estilo</span>
+          <ul>
+            <li>.fila th:hover { background-color: black; color: white; }</li>
+            <li>padding: 10px;</li>
+          </ul>
+        </li>
+
+        <li>
+          <span>Responsive</span>
+          <ul>
+            <li>.divtabla { max-height: 150px; overflow-y: auto; }</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="divtabla">
+      <table class="tabla">
+        <tr class="titulo">
+          <th>Asignatura</th>
+          <th>Horas / Semana</th>
+          <th>Profesor</th>
+        </tr>
+        <tr class="fila">
+          <th>Diseño de Interfaces Web</th>
+          <th>6</th>
+          <th>Maria Cristina</th>
+        </tr>
+        <tr class="fila">
+          <th>Despliegue de aplicaciones web</th>
+          <th>5</th>
+          <th>Yolanda</th>
+        </tr>
+        <tr class="fila">
+          <th>Desarrollo de aplicaciones en entorno servidor</th>
+          <th>8</th>
+          <th>César</th>
+        </tr>
+        <tr class="fila">
+          <th>Desarrollo de aplicaciones en entorno cliente</th>
+          <th>6</th>
+          <th>Rafael</th>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <br />
     <hi>Ejercicio 3.1</hi>
-    <p>Herramientas utilizadas:
-<ul class="lista">
-  <li>
-    <span>Bordes</span>
-    <ul>
-      <li>border-collapse: collapse;</li>
-      <li>border: 5px groove black;</li>
-    </ul>
-  </li>
+    <p>Herramientas utilizadas:</p>
+    <ul class="lista">
+      <li>
+        <span>Bordes</span>
+        <ul>
+          <li>border-collapse: collapse;</li>
+          <li>border: 5px groove black;</li>
+        </ul>
+      </li>
 
-  <li>
-    <span>Size</span>
-    <ul>
-      <li>width: 100%;</li>
-      <li>th:nth-child(1) { width: 65%; }</li>
-      <li>th:nth-child(2) { width: 5%; }</li>
-      <li>th:nth-child(3) { width: 30%; }</li>
-    </ul>
-  </li>
+      <li>
+        <span>Size</span>
+        <ul>
+          <li>width: 100%;</li>
+          <li>th:nth-child(1) { width: 65%; }</li>
+          <li>th:nth-child(2) { width: 5%; }</li>
+          <li>th:nth-child(3) { width: 30%; }</li>
+        </ul>
+      </li>
 
-  <li>
-    <span>Alineamiento</span>
-    <ul>
-      <li>text-align: left;</li>
-      <li>text-align: center;</li>
-    </ul>
-  </li>
+      <li>
+        <span>Alineamiento</span>
+        <ul>
+          <li>text-align: left;</li>
+          <li>text-align: center;</li>
+        </ul>
+      </li>
 
-  <li>
-    <span>Estilo</span>
-    <ul>
-      <li>.fila th:hover { background-color: black; color: white; }</li>
-      <li>padding: 10px;</li>
-    </ul>
-  </li>
+      <li>
+        <span>Estilo</span>
+        <ul>
+          <li>.fila th:hover { background-color: black; color: white; }</li>
+          <li>padding: 10px;</li>
+        </ul>
+      </li>
 
-  <li>
-    <span>Responsive</span>
-    <ul>
-      <li>.divtabla { max-height: 150px; overflow-y: auto; }</li>
+      <li>
+        <span>Responsive</span>
+        <ul>
+          <li>.divtabla { max-height: 150px; overflow-y: auto; }</li>
+        </ul>
+      </li>
     </ul>
-  </li>
-</ul>
-
-    </p>
-</div>
-<div class="divtabla">
-<table class="tabla">
-  <tr class="titulo">
-    <th>Asignatura</th>
-    <th>Horas / Semana</th>
-    <th>Profesor</th>
-  </tr>
-  <tr class="fila">
-    <th>Diseño de Interfaces Web</th>
-    <th>6</th>
-    <th>Maria Cristina</th>
-  </tr>
-  <tr class="fila">
-    <th>Despliegue de aplicaciones web</th>
-    <th>5</th>
-    <th>Yolanda</th>
-  </tr>
-  <tr class="fila">
-    <th>Desarrollo de aplicaciones en entrono servidor</th>
-    <th>8</th>
-    <th>César</th>
-  </tr>
-  <tr class="fila">
-    <th>Desarrollo de aplicaciones en entrono cliente</th>
-    <th>6</th>
-    <th>Rafael</th>
-  </tr>
-</table>
-</div>
-</body>
+  </body>
 </html>
