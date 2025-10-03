@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="ejercicio3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Ejercicio 3</title>
   </head>
   <body>
@@ -84,49 +88,49 @@
     </div>
     <br />
     <br />
-    <hi>Ejercicio 3.1</hi>
-    <p>Herramientas utilizadas:</p>
+    <hi>Ejercicio 3.2</hi>
+    <p>Menús utilizados:</p>
     <ul class="lista">
-      <li>
-        <span>Bordes</span>
-        <ul>
-          <li>border-collapse: collapse;</li>
-          <li>border: 5px groove black;</li>
-        </ul>
-      </li>
-
-      <li>
-        <span>Size</span>
-        <ul>
-          <li>width: 100%;</li>
-          <li>th:nth-child(1) { width: 65%; }</li>
-          <li>th:nth-child(2) { width: 5%; }</li>
-          <li>th:nth-child(3) { width: 30%; }</li>
-        </ul>
-      </li>
-
-      <li>
-        <span>Alineamiento</span>
-        <ul>
-          <li>text-align: left;</li>
-          <li>text-align: center;</li>
-        </ul>
-      </li>
-
-      <li>
-        <span>Estilo</span>
-        <ul>
-          <li>.fila th:hover { background-color: black; color: white; }</li>
-          <li>padding: 10px;</li>
-        </ul>
-      </li>
-
-      <li>
-        <span>Responsive</span>
-        <ul>
-          <li>.divtabla { max-height: 150px; overflow-y: auto; }</li>
-        </ul>
-      </li>
+      <li>Icon Bar</li>
+      <li>Icon Bar</li>
+      <li>Icon Bar</li>
+      <li>Icon Bar</li>
+      <li>Icon Bar</li>
     </ul>
+
+    <div id="icon-bar" class="icon-bar">
+      <div onclick="menuBarras(this)" class="menuBarras">
+        <span class="bar1"></span>
+        <span class="bar2"></span>
+        <span class="bar3"></span>
+      </div>
+
+      <a href="#">
+        <i class="fa fa-home"></i>
+        <span class="label">Home</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-search"></i>
+        <span class="label">Buscar</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="label">Mensaje</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-globe"></i>
+        <span class="label">Planeta</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-trash"></i>
+        <span class="label">Basura</span>
+      </a>
+    </div>
+    <script>
+      function menuBarras(x) {
+        x.classList.toggle("change");
+        document.getElementById("icon-bar").classList.toggle("is-open");
+      }
+    </script>
   </body>
 </html>
