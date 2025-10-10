@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Ejercicio Inputs</title>
+  </head>
+  <body>
+    <form id="formEdad">
+      <fieldset class="grupo">
+        <legend>Selecciona tus hobbies:</legend>
+        <label
+          ><input type="checkbox" name="hobbies" value="deporte" />
+          Deporte
+        </label>
+        <label
+          ><input type="checkbox" name="hobbies" value="musica" /> Música</label
+        >
+        <label
+          ><input type="checkbox" name="hobbies" value="lectura" />
+          Lectura</label
+        >
+      </fieldset>
+      <br />
+
+      <fieldset class="grupo">
+        <legend>Elige tu color favorito:</legend>
+        <label
+          ><input type="radio" name="color" value="rojo" id="rojo" required />
+          Rojo</label
+        >
+        <label
+          ><input type="radio" name="color" value="azul" id="azul" />
+          Azul</label
+        >
+        <label
+          ><input type="radio" name="color" value="verde" id="verde" />
+          Verde</label
+        >
+        <label
+          ><input type="radio" name="color" value="amarillo" id="amarillo" />
+          Amarillo</label
+        >
+      </fieldset>
+      <br />
+
+      <label id="titEdad">Edad:</label>
+      <input
+        type="text"
+        id="edad"
+        name="edad"
+        pattern="^(1[8-9]|[2-5][0-9]|6[0-5])$"
+        inputmode="numeric"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        maxlength="2"
+        required
+      />
+      <span class="icon"></span>
+      <br /><br />
+      <label id="aviso">NO PUEDE SER MENOR DE 18 NI MAYOR DE 65</label>
+      <br /><br />
+
+      <label for="nombre">Nombre (solo letras):</label>
+      <input
+        type="text"
+        id="name"
+        name="nombre"
+        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+        maxlength="30"
+        oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')"
+        required
+      />
+      <span class="icon"></span>
+      <br /><br />
+
+      <label for="dni">DNI:</label>
+      <input
+        type="text"
+        id="dni"
+        name="dni"
+        pattern="^\d{8}[A-Za-z]$"
+        maxlength="9"
+        required
+        placeholder="12345678A"
+      />
+      <span class="icon"></span>
+      <br /><br />
+
+      <a type="submit" id="btnCheck" href="#alert"> Comprobar </a>
+    </form>
+    <div id="alert">
+      <a class="closebtn" href="#btnCheck">&times;</a>
+      <strong>Enviado!</strong> Formulario enviado correctamente.
+    </div>
+  </body>
+</html>
