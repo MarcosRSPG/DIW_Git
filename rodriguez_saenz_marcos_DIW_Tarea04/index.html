@@ -7,7 +7,7 @@
     <title>Ejercicio Inputs</title>
   </head>
   <body>
-    <form id="formEdad">
+    <form id="formulario">
       <fieldset class="grupo">
         <legend>Selecciona tus hobbies:</legend>
         <label
@@ -87,11 +87,16 @@
       <span class="icon"></span>
       <br /><br />
 
-      <a type="submit" id="btnCheck" href="#alert"> Comprobar </a>
+      <button type="submit" id="btnCheck" formaction="#alert-box">
+        Comprobar
+      </button>
     </form>
-    <div id="alert">
-      <a class="closebtn" href="#btnCheck">&times;</a>
-      <strong>Enviado!</strong> Formulario enviado correctamente.
+    <div id="alert-box">
+      <div class="alert-background"></div>
+      <div id="alert">
+        <a class="closebtn" href="#formulario">&times;</a>
+        <strong>Enviado!</strong> Formulario enviado correctamente.
+      </div>
     </div>
   </body>
 </html>
