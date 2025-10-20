@@ -1,0 +1,39 @@
+.img-intro {
+  transform: scale(1.2);
+  transition: transform 0.6s ease, filter 0.6s ease;
+  will-change: transform;
+}
+.intro:hover .img-intro {
+  transform: scale(1);
+}
+
+.intro-overlay {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+.intro:hover .intro-overlay {
+  opacity: 1;
+}
+
+.titulo-intro {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: 500%;
+  transition: transform 0.4s ease, text-shadow 0.4s ease,
+    letter-spacing 0.4s ease;
+  will-change: transform;
+}
+.intro:hover .titulo-intro {
+  transform: translate(-50%, -50%) scale(1.2);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+.container-fluid {
+  background-color: rgb(42, 255, 42);
+}
