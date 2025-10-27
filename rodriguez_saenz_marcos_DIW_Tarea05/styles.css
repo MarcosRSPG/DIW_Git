@@ -17,12 +17,34 @@ body {
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
     Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--bs-body-color);
-  background-color: #f8faf9;
+  background-image: url("./img/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .intro {
   height: 62vh;
   min-height: 420px;
+  mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - 48px),
+    transparent 100%
+  );
+}
+
+.intro::after {
+  content: "";
+  position: absolute;
+  inset: -2px -2px -8px -2px;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 30% at 50% 100%,
+    rgba(34, 42, 36, 0.45) 0%,
+    rgba(34, 42, 36, 0.25) 40%,
+    rgba(34, 42, 36, 0) 80%
+  );
+  filter: blur(8px);
 }
 
 .img-intro {
