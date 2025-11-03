@@ -32,12 +32,10 @@ body {
   box-shadow: 0 18px 40px rgba(148, 163, 184, 0.3);
   color: #374151;
 
-  /* 🔽 AQUÍ EL “100% MÁS GRANDE” 🔽 */
-  transform: scale(1.5); /* 2 = el doble de tamaño */
-  transform-origin: center; /* que crezca desde el centro */
+  transform: scale(1.5);
+  transform-origin: center;
 }
 
-/* Título más grande */
 #titulo {
   grid-column: 1 / -1;
   font-size: 2.1rem;
@@ -48,7 +46,6 @@ body {
   margin: 0 0 1rem;
 }
 
-/* Labels un pelín más grandes */
 #lblUser,
 #lblPassword {
   font-size: 1rem;
@@ -57,7 +54,6 @@ body {
   align-self: center;
 }
 
-/* Inputs más altos y con texto un poco más grande */
 #inputUser,
 #inputPassword {
   width: 100%;
@@ -85,7 +81,6 @@ body {
   transform: translateY(-1px);
 }
 
-/* Botón más grande y más alto */
 #submitEntrar {
   grid-column: 1 / -1;
   width: 100%;
@@ -118,7 +113,6 @@ body {
   filter: brightness(0.98);
 }
 
-/* Texto de registro un poco más legible */
 #registroLink {
   grid-column: 1 / -1;
   text-align: center;
