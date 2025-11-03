@@ -77,20 +77,22 @@
             role="search"
             aria-label="Búsqueda"
           >
-            <a
-              href="#filtrar"
+            <button
+              id="btnFiltros"
+              type="button"
               class="icon-link text-info fs-1 me-2"
               aria-label="Filtrar rutas"
               title="Filtrar rutas"
             >
               <i class="bi bi-funnel-fill"></i>
-            </a>
+            </button>
 
             <input
               class="form-control me-2"
               type="search"
               placeholder="Buscar rutas..."
               aria-label="Buscar"
+              name="q"
             />
 
             <button
@@ -154,64 +156,287 @@
     </header>
     <main class="container my-5">
       <article class="route-card mb-3">
-        <contenido class="row g-3 align-items-start">
-          <desc class="col-md">
-            <h5 class="mb-2">TÍTULO DE LA RUTA</h5>
-            <p class="mb-3">
+        <div class="row g-3 align-items-start route-content">
+          <div class="col-md">
+            <header
+              class="route-header d-flex flex-wrap justify-content-between align-items-baseline p-1"
+            >
+              <h2 class="route-title h5 mb-0">TÍTULO DE LA RUTA</h2>
+
+              <span class="route-difficulty route-difficulty-medium">
+                Media
+              </span>
+            </header>
+
+            <p class="route-description mb-3">
               Descripción y críticas de la ruta. Un breve texto con lo más
               importante del recorrido.
             </p>
-            <opt class="d-flex align-items-center gap-3">
-              <span class="fw-semibold">Tags</span>
-              <i class="bi bi-chat-left-text"></i>
-              <i class="bi bi-hand-thumbs-up"></i>
-              <i class="bi bi-hand-thumbs-down"></i>
-            </opt>
-          </desc>
-          <info class="col-sm-5 col-md-4 col-lg-3">
-            <mapa class="map-box mb-2">Mapa / Miniatura</mapa>
-            <ul class="list-unstyled small mb-0">
+
+            <div
+              class="route-tags d-flex flex-wrap align-items-center gap-2 mb-3"
+            >
+              <span class="fw-semibold me-1 text-muted">Tags</span>
+              <span class="tag-pill">Bosque</span>
+              <span class="tag-pill">Río</span>
+              <span class="tag-pill">Circular</span>
+            </div>
+
+            <div class="route-actions d-flex align-items-center gap-2">
+              <button
+                class="route-action-btn"
+                type="button"
+                title="Comentarios"
+              >
+                <i class="bi bi-chat-left-text"></i>
+              </button>
+              <button class="route-action-btn" type="button" title="Me gusta">
+                <i class="bi bi-hand-thumbs-up"></i>
+              </button>
+              <button
+                class="route-action-btn"
+                type="button"
+                title="No me gusta"
+              >
+                <i class="bi bi-hand-thumbs-down"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-sm-5 col-md-4 col-lg-3">
+            <div class="map-box mb-2">
+              <img
+                src="./img/ruta-1.jpg"
+                alt="Mapa o miniatura de la ruta"
+                class="map-img"
+              />
+            </div>
+
+            <ul class="list-unstyled small mb-0 route-details">
               <li><span class="muted-label">Fecha:</span> 12/05/2025</li>
-              <li><span class="muted-label">Ubi. salida:</span> Valle Verde</li>
-              <li><span class="muted-label">Ubi. llegada:</span> Pico Norte</li>
+              <li><span class="muted-label">Salida:</span> Valle Verde</li>
+              <li><span class="muted-label">Llegada:</span> Pico Norte</li>
               <li><span class="muted-label">Tiempo:</span> 4 h 30 m</li>
               <li><span class="muted-label">Dificultad:</span> Media</li>
             </ul>
-          </info>
-        </contenido>
+          </div>
+        </div>
       </article>
+
       <article class="route-card mb-3">
-        <contenido class="row g-3 align-items-start">
-          <desc class="col-md">
-            <h5 class="mb-2">TÍTULO DE LA SEGUNDA RUTA</h5>
-            <p class="mb-3">
-              Descripción y críticas de la segunda ruta. Un breve texto con lo
-              más importante del segundo recorrido.
+        <div class="row g-3 align-items-start route-content">
+          <div class="col-md">
+            <header
+              class="route-header d-flex flex-wrap justify-content-between align-items-baseline p-1"
+            >
+              <h2 class="route-title h5 mb-0">TÍTULO DE LA RUTA</h2>
+
+              <span class="route-difficulty route-difficulty-medium">
+                Media
+              </span>
+            </header>
+
+            <p class="route-description mb-3">
+              Descripción y críticas de la ruta. Un breve texto con lo más
+              importante del recorrido.
             </p>
-            <opt class="d-flex align-items-center gap-3">
-              <span class="fw-semibold">Tags</span>
-              <i class="bi bi-chat-left-text"></i>
-              <i class="bi bi-hand-thumbs-up"></i>
-              <i class="bi bi-hand-thumbs-down"></i>
-            </opt>
-          </desc>
-          <info class="col-sm-5 col-md-4 col-lg-3">
-            <mapa class="map-box mb-2">Mapa / Miniatura</mapa>
-            <ul class="list-unstyled small mb-0">
-              <li><span class="muted-label">Fecha:</span> 25/10/2025</li>
-              <li><span class="muted-label">Ubi. salida:</span> Valle Azul</li>
-              <li><span class="muted-label">Ubi. llegada:</span> Pico Sur</li>
-              <li><span class="muted-label">Tiempo:</span> 3 h</li>
+
+            <div
+              class="route-tags d-flex flex-wrap align-items-center gap-2 mb-3"
+            >
+              <span class="fw-semibold me-1 text-muted">Tags</span>
+              <span class="tag-pill">Bosque</span>
+              <span class="tag-pill">Río</span>
+              <span class="tag-pill">Circular</span>
+            </div>
+
+            <div class="route-actions d-flex align-items-center gap-2">
+              <button
+                class="route-action-btn"
+                type="button"
+                title="Comentarios"
+              >
+                <i class="bi bi-chat-left-text"></i>
+              </button>
+              <button class="route-action-btn" type="button" title="Me gusta">
+                <i class="bi bi-hand-thumbs-up"></i>
+              </button>
+              <button
+                class="route-action-btn"
+                type="button"
+                title="No me gusta"
+              >
+                <i class="bi bi-hand-thumbs-down"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-sm-5 col-md-4 col-lg-3">
+            <div class="map-box mb-2">Mapa / Miniatura</div>
+            <ul class="list-unstyled small mb-0 route-details">
+              <li><span class="muted-label">Fecha:</span> 12/05/2025</li>
+              <li><span class="muted-label">Salida:</span> Valle Verde</li>
+              <li><span class="muted-label">Llegada:</span> Pico Norte</li>
+              <li><span class="muted-label">Tiempo:</span> 4 h 30 m</li>
               <li><span class="muted-label">Dificultad:</span> Media</li>
             </ul>
-          </info>
-        </contenido>
+          </div>
+        </div>
       </article>
     </main>
+
+    <div id="filtersOverlay" class="filters-overlay">
+      <div class="filters-modal">
+        <button
+          type="button"
+          class="filters-modal-close"
+          id="cerrarFiltros"
+          aria-label="Cerrar filtros"
+          title="Cerrar filtros"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h2 class="filters-modal-title">Filtrar rutas</h2>
+
+        <form
+          id="filtersForm"
+          method="get"
+          action="listado_rutas.php"
+          class="filters-form"
+        >
+          <div class="filters-field filters-full">
+            <span class="form-label d-block">Dificultad</span>
+            <div class="filters-chip-group">
+              <label class="filters-chip">
+                <input type="checkbox" name="difficulty[]" value="facil" />
+                <span>Fácil</span>
+              </label>
+              <label class="filters-chip">
+                <input type="checkbox" name="difficulty[]" value="media" />
+                <span>Media</span>
+              </label>
+              <label class="filters-chip">
+                <input type="checkbox" name="difficulty[]" value="dificil" />
+                <span>Difícil</span>
+              </label>
+              <label class="filters-chip">
+                <input type="checkbox" name="difficulty[]" value="experto" />
+                <span>Experto</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="filters-field">
+            <label for="date_from" class="form-label">Fecha desde</label>
+            <input
+              type="date"
+              id="date_from"
+              name="date_from"
+              class="form-control"
+            />
+          </div>
+
+          <div class="filters-field">
+            <label for="date_to" class="form-label">Fecha hasta</label>
+            <input
+              type="date"
+              id="date_to"
+              name="date_to"
+              class="form-control"
+            />
+          </div>
+
+          <div class="filters-field">
+            <label for="min_hours" class="form-label"
+              >Duración mínima (horas)</label
+            >
+            <input
+              type="number"
+              id="min_hours"
+              name="min_hours"
+              min="0"
+              max="48"
+              class="form-control"
+            />
+          </div>
+
+          <div class="filters-field">
+            <label for="max_hours" class="form-label"
+              >Duración máxima (horas)</label
+            >
+            <input
+              type="number"
+              id="max_hours"
+              name="max_hours"
+              min="0"
+              max="48"
+              class="form-control"
+            />
+          </div>
+
+          <div class="filters-field filters-full">
+            <label for="tags" class="form-label">Tags</label>
+            <select
+              id="tags"
+              name="tags[]"
+              multiple
+              size="3"
+              class="form-select"
+            >
+              <option value="bosque">Bosque</option>
+              <option value="montaña">Montaña</option>
+              <option value="costa">Costa</option>
+              <option value="rio">Río</option>
+            </select>
+            <small class="text-muted"
+              >Pulsa Ctrl/Cmd para seleccionar varios</small
+            >
+          </div>
+
+          <div class="filters-buttons filters-full">
+            <button type="submit" class="btn btn-success px-4">
+              Aplicar filtros
+            </button>
+            <button type="reset" class="btn btn-outline-secondary px-4">
+              Limpiar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <!-- JS para abrir/cerrar el popup de filtros -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnFiltros = document.getElementById("btnFiltros");
+        const overlay = document.getElementById("filtersOverlay");
+        const cerrarBtn = document.getElementById("cerrarFiltros");
+
+        if (!btnFiltros || !overlay || !cerrarBtn) return;
+
+        const abrir = () => overlay.classList.add("open");
+        const cerrar = () => overlay.classList.remove("open");
+
+        btnFiltros.addEventListener("click", abrir);
+        cerrarBtn.addEventListener("click", cerrar);
+
+        // Cerrar al hacer click en el fondo oscuro
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) cerrar();
+        });
+
+        // Cerrar con ESC
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") cerrar();
+        });
+      });
+    </script>
   </body>
 </html>

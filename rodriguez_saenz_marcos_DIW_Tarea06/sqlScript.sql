@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS user_settings (
    theme                     VARCHAR(20)  NOT NULL DEFAULT 'light',
    language                  VARCHAR(10)  NOT NULL DEFAULT 'es',
    items_per_page            TINYINT UNSIGNED NOT NULL DEFAULT 10,
-   default_difficulty_filter VARCHAR(50)  DEFAULT NULL,
    email_notifications       TINYINT(1)   NOT NULL DEFAULT 1,
    created_at                DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at                DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP

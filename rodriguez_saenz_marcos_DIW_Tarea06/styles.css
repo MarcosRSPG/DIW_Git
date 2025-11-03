@@ -101,6 +101,9 @@ header {
   border-radius: 12px;
   transition: transform 0.15s ease, opacity 0.15s ease,
     background-color 0.15s ease;
+
+  background-color: transparent; /* 🔹 aquí lo hacemos transparente */
+  border: none; /* 🔹 y sin borde de botón */
 }
 .icon-link:hover {
   opacity: 0.95;
@@ -136,79 +139,147 @@ header {
   max-width: 1140px;
 }
 
-contenido,
-desc,
-info,
-mapa,
-opt {
-  display: block;
-}
-
 .route-card {
   background: linear-gradient(180deg, #e8f3ec, #dbefe3);
   border: 3px solid #3b6a4a;
   border-radius: 14px;
-  padding: 1rem;
+  padding-top: 0;
+  padding: 1.1rem 1.2rem;
   box-shadow: 0 8px 24px rgba(59, 106, 74, 0.16);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.route-card h5 {
+.route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(59, 106, 74, 0.24);
+}
+
+.route-content {
+  align-items: stretch;
+}
+
+.route-title {
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  margin: 0.25rem 0 0.25rem;
+  letter-spacing: 0.03em;
+  font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
-.route-card p {
+/* Dificultad (pill a la derecha del título) */
+.route-difficulty {
+  padding: 0.15rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 2px solid #1f2933;
+  background: #ffffffb3;
+}
+
+/* Colores según dificultad */
+.route-difficulty-easy,
+.route-difficulty-facil {
+  background: #ecfdf3;
+  border-color: #166534;
+  color: #166534;
+}
+.route-difficulty-medium,
+.route-difficulty-media {
+  background: #fef9c3;
+  border-color: #92400e;
+  color: #92400e;
+}
+.route-difficulty-hard,
+.route-difficulty-dificil {
+  background: #fee2e2;
+  border-color: #b91c1c;
+  color: #b91c1c;
+}
+.route-difficulty-expert,
+.route-difficulty-experto {
+  background: #e0f2fe;
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+.route-description {
   margin: 0 0 0.75rem;
 }
 
-.route-card {
-  position: relative;
-  padding-bottom: 5.25rem;
-}
-
-.route-card opt {
-  position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  display: block;
-}
-
-.route-card opt .fw-semibold {
-  display: block;
-  margin: 0 0 0.35rem;
+/* Tags */
+.route-tags .fw-semibold {
   color: #6b705c;
 }
 
-.route-card opt i.bi {
-  margin-right: 0.5rem;
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 42, 36, 0.5);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Botones de acciones (comentarios, like/dislike) */
+.route-actions {
+  margin-top: 0.25rem;
+}
+
+.route-action-btn {
   width: 44px;
   height: 44px;
+  border-radius: 0.7rem;
+  border: 2px solid #222a24;
+  background: #ffffff;
   display: inline-grid;
   place-items: center;
-  border: 3px solid #222a24;
-  border-radius: 0.6rem;
-  background: #fff;
   color: #3b6a4a;
-  font-size: 1.25rem;
-  line-height: 1;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease, color 0.15s ease;
 }
-.route-card opt i.bi:last-child {
-  margin-right: 0;
+
+.route-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(59, 106, 74, 0.22);
+  background-color: #ecfccb;
 }
+
+.route-action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(59, 106, 74, 0.18);
+}
+
+/* Caja mapa y detalles a la derecha */
 
 .route-card .map-box {
   background: #fff;
   border: 3px solid #223127;
   border-radius: 0.5rem;
-  padding: 0.35rem 0.5rem;
-  min-height: 70px;
-  display: grid;
-  place-items: center;
+
+  /* 🔹 Clave: cuadrado responsivo */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* siempre cuadrado */
+  overflow: hidden;
+
+  /* ya no hace falta el min-height ni el grid */
+  /* min-height: 70px; */
+  /* display: grid; */
+  /* place-items: center; */
   color: #6b705c;
+}
+
+/* Imagen dentro de la caja */
+.route-card .map-box .map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* recorta sin deformar */
+  display: block;
 }
 
 .route-card .muted-label {
@@ -217,9 +288,109 @@ opt {
   font-weight: 700;
   color: #222a24;
 }
-.route-card info ul {
+
+.route-details {
   margin: 0;
 }
-.route-card info li + li {
+.route-details li + li {
   margin-top: 0.25rem;
+}
+
+.filters-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  z-index: 2000;
+}
+
+.filters-overlay.open {
+  display: flex;
+}
+
+.filters-modal {
+  position: relative;
+  max-width: 780px;
+  width: 100%;
+  background: #fdfbf7;
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 22px 55px rgba(10, 14, 12, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.filters-modal-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+.filters-modal-close:hover {
+  color: #111827;
+}
+
+.filters-modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 1.1rem;
+  color: #1f2933;
+}
+
+.filters-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.filters-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.filters-full {
+  grid-column: 1 / -1;
+}
+
+.filters-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filters-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(156, 163, 175, 0.8);
+  background: #f9fafb;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.08s ease;
+}
+.filters-chip input {
+  accent-color: #3b6a4a;
+}
+.filters-chip:hover {
+  background: #ecfccb;
+  border-color: #3b6a4a;
+  box-shadow: 0 4px 10px rgba(59, 106, 74, 0.28);
+  transform: translateY(-1px);
+}
+
+.filters-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
