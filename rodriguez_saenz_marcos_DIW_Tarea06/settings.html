@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajustes de la cuenta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styleSettings.css" />
+  </head>
+  <body>
+    <!-- action="settings.php" es un ejemplo: ahí procesarías y guardarías en la tabla -->
+    <form id="settingsForm" method="post" action="settings.php">
+      <h2 id="titulo">Ajustes de la cuenta</h2>
+
+      <!-- Si quieres, aquí podrías tener un hidden con el user_id
+         <input type="hidden" name="user_id" value="1">
+    -->
+
+      <!-- Sección: Apariencia -->
+      <div class="section-title">Apariencia</div>
+
+      <label for="theme">Tema</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="theme" value="light" checked />
+          Claro
+        </label>
+        <label>
+          <input type="radio" name="theme" value="dark" />
+          Oscuro
+        </label>
+        <label>
+          <input type="radio" name="theme" value="system" />
+          Usar tema del sistema
+        </label>
+      </div>
+
+      <!-- Sección: Idioma y elementos por página -->
+      <div class="section-title">Idioma y contenido</div>
+
+      <label for="language">Idioma</label>
+      <select id="language" name="language">
+        <option value="es" selected>Español</option>
+        <option value="en">Inglés</option>
+        <option value="fr">Francés</option>
+        <option value="de">Alemán</option>
+      </select>
+
+      <label for="items_per_page">Elementos por página</label>
+      <select id="items_per_page" name="items_per_page">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+
+      <!-- Sección: Filtros por defecto -->
+      <div class="section-title">Filtros por defecto</div>
+
+      <label for="default_difficulty_filter">Dificultad por defecto</label>
+      <select id="default_difficulty_filter" name="default_difficulty_filter">
+        <option value="">Todas</option>
+        <option value="facil">Fácil</option>
+        <option value="media">Media</option>
+        <option value="dificil">Difícil</option>
+        <option value="experto">Experto</option>
+      </select>
+
+      <!-- Sección: Notificaciones -->
+      <div class="section-title">Notificaciones</div>
+
+      <label for="email_notifications">Notificaciones por correo</label>
+      <div class="checkbox-group">
+        <!-- truco: hidden para enviar 0 si el checkbox va desmarcado -->
+        <input type="hidden" name="email_notifications" value="0" />
+        <label>
+          <input
+            type="checkbox"
+            id="email_notifications"
+            name="email_notifications"
+            value="1"
+            checked
+          />
+          Recibir notificaciones por email
+        </label>
+      </div>
+
+      <button type="submit" id="btnGuardar">Guardar cambios</button>
+
+      <p id="volver">
+        <a href="index.html">Volver al inicio</a>
+      </p>
+    </form>
+  </body>
+</html>
