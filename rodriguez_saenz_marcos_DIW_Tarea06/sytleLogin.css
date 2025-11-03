@@ -1,0 +1,138 @@
+html,
+body {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #222a24;
+  background-image: url("./img/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#formLogin {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-auto-rows: auto;
+  row-gap: 1.3rem;
+  column-gap: 1.75rem;
+
+  background: #fdfbf7;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 20px;
+  padding: 3rem 3.25rem;
+  width: min(540px, 95vw);
+  box-shadow: 0 18px 40px rgba(148, 163, 184, 0.3);
+  color: #374151;
+
+  /* 🔽 AQUÍ EL “100% MÁS GRANDE” 🔽 */
+  transform: scale(1.5); /* 2 = el doble de tamaño */
+  transform-origin: center; /* que crezca desde el centro */
+}
+
+/* Título más grande */
+#titulo {
+  grid-column: 1 / -1;
+  font-size: 2.1rem;
+  font-weight: 650;
+  text-align: center;
+  color: #1f2933;
+  letter-spacing: 0.03em;
+  margin: 0 0 1rem;
+}
+
+/* Labels un pelín más grandes */
+#lblUser,
+#lblPassword {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+  align-self: center;
+}
+
+/* Inputs más altos y con texto un poco más grande */
+#inputUser,
+#inputPassword {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid rgba(156, 163, 175, 0.8);
+  background: #f9fafb;
+  color: #111827;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    background 0.18s ease, transform 0.08s ease;
+}
+
+#inputUser::placeholder,
+#inputPassword::placeholder {
+  color: #9ca3af;
+}
+
+#inputUser:focus,
+#inputPassword:focus {
+  border-color: #7cb342;
+  box-shadow: 0 0 0 2px rgba(124, 179, 66, 0.18);
+  background: #fefce8;
+  transform: translateY(-1px);
+}
+
+/* Botón más grande y más alto */
+#submitEntrar {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7cb342, #558b2f);
+  color: #fdfbf7;
+  font-weight: 650;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 12px 28px rgba(85, 139, 47, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+#submitEntrar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(85, 139, 47, 0.4);
+  filter: brightness(1.03);
+}
+
+#submitEntrar:active {
+  transform: translateY(0);
+  box-shadow: 0 9px 20px rgba(85, 139, 47, 0.3);
+  filter: brightness(0.98);
+}
+
+/* Texto de registro un poco más legible */
+#registroLink {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 1rem;
+}
+
+#registroLink a {
+  color: #558b2f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#registroLink a:hover {
+  text-decoration: underline;
+}
