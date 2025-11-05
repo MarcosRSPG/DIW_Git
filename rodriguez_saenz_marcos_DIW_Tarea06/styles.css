@@ -394,3 +394,34 @@ header {
   gap: 0.75rem;
   margin-top: 0.5rem;
 }
+/* Aseguramos que las columnas de la fila tengan la misma altura */
+.route-content {
+  align-items: stretch !important; /* pisamos align-items-start de Bootstrap si hace falta */
+}
+
+/* Contenedor principal de la columna izquierda */
+.route-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Bloque inferior: tags + acciones abajo del todo */
+.route-bottom {
+  margin-top: auto; /* 🔑 empuja este bloque hacia el fondo del div */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+
+/* Ajustes para que no metan margen extra */
+.route-bottom .route-tags {
+  margin-bottom: 0;
+}
+
+.route-bottom .route-actions {
+  margin-top: 0;
+}
