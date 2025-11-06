@@ -17,7 +17,6 @@ body {
   align-items: center;
 }
 
-/* FORMULARIO REGISTRO (mismo estilo que login, pero algo más grande) */
 #formRegister {
   display: grid;
   grid-template-columns: 1fr 2fr;

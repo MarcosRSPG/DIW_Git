@@ -102,8 +102,8 @@ header {
   transition: transform 0.15s ease, opacity 0.15s ease,
     background-color 0.15s ease;
 
-  background-color: transparent; /* 🔹 aquí lo hacemos transparente */
-  border: none; /* 🔹 y sin borde de botón */
+  background-color: transparent;
+  border: none;
 }
 .icon-link:hover {
   opacity: 0.95;
@@ -165,7 +165,6 @@ header {
   font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
-/* Dificultad (pill a la derecha del título) */
 .route-difficulty {
   padding: 0.15rem 0.8rem;
   border-radius: 999px;
@@ -177,7 +176,6 @@ header {
   background: #ffffffb3;
 }
 
-/* Colores según dificultad */
 .route-difficulty-easy,
 .route-difficulty-facil {
   background: #ecfdf3;
@@ -207,7 +205,6 @@ header {
   margin: 0 0 0.75rem;
 }
 
-/* Tags */
 .route-tags .fw-semibold {
   color: #6b705c;
 }
@@ -224,7 +221,6 @@ header {
   letter-spacing: 0.03em;
 }
 
-/* Botones de acciones (comentarios, like/dislike) */
 .route-actions {
   margin-top: 0.25rem;
 }
@@ -255,30 +251,22 @@ header {
   box-shadow: 0 4px 10px rgba(59, 106, 74, 0.18);
 }
 
-/* Caja mapa y detalles a la derecha */
-
 .route-card .map-box {
   background: #fff;
   border: 3px solid #223127;
   border-radius: 0.5rem;
 
-  /* 🔹 Clave: cuadrado responsivo */
   width: 100%;
-  aspect-ratio: 1 / 1; /* siempre cuadrado */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 
-  /* ya no hace falta el min-height ni el grid */
-  /* min-height: 70px; */
-  /* display: grid; */
-  /* place-items: center; */
   color: #6b705c;
 }
 
-/* Imagen dentro de la caja */
 .route-card .map-box .map-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* recorta sin deformar */
+  object-fit: cover;
   display: block;
 }
 
@@ -394,21 +382,19 @@ header {
   gap: 0.75rem;
   margin-top: 0.5rem;
 }
-/* Aseguramos que las columnas de la fila tengan la misma altura */
+
 .route-content {
-  align-items: stretch !important; /* pisamos align-items-start de Bootstrap si hace falta */
+  align-items: stretch !important;
 }
 
-/* Contenedor principal de la columna izquierda */
 .route-main {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* Bloque inferior: tags + acciones abajo del todo */
 .route-bottom {
-  margin-top: auto; /* 🔑 empuja este bloque hacia el fondo del div */
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -417,7 +403,6 @@ header {
   padding-top: 0.5rem;
 }
 
-/* Ajustes para que no metan margen extra */
 .route-bottom .route-tags {
   margin-bottom: 0;
 }

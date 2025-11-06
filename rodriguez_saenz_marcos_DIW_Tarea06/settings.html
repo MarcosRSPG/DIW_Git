@@ -13,15 +13,9 @@
     <link rel="stylesheet" href="styleSettings.css" />
   </head>
   <body>
-    <!-- action="settings.php" es un ejemplo: ahí procesarías y guardarías en la tabla -->
     <form id="settingsForm" method="post" action="settings.php">
       <h2 id="titulo">Ajustes de la cuenta</h2>
 
-      <!-- Si quieres, aquí podrías tener un hidden con el user_id
-         <input type="hidden" name="user_id" value="1">
-    -->
-
-      <!-- Sección: Apariencia -->
       <div class="section-title">Apariencia</div>
 
       <label for="theme">Tema</label>
@@ -40,7 +34,6 @@
         </label>
       </div>
 
-      <!-- Sección: Idioma y elementos por página -->
       <div class="section-title">Idioma y contenido</div>
 
       <label for="language">Idioma</label>
@@ -59,12 +52,10 @@
         <option value="50">50</option>
       </select>
 
-      <!-- Sección: Notificaciones -->
       <div class="section-title">Notificaciones</div>
 
       <label for="email_notifications">Notificaciones por correo</label>
       <div class="checkbox-group">
-        <!-- truco: hidden para enviar 0 si el checkbox va desmarcado -->
         <input type="hidden" name="email_notifications" value="0" />
         <label>
           <input

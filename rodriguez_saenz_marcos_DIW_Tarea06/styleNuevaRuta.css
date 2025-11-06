@@ -17,7 +17,6 @@ body {
   align-items: center;
 }
 
-/* CONTENEDOR CREAR RUTA */
 #routeForm {
   display: flex;
   flex-direction: column;
@@ -51,7 +50,6 @@ body {
   border-radius: 999px;
 }
 
-/* Campos generales */
 .field {
   display: flex;
   flex-direction: column;
@@ -61,7 +59,7 @@ body {
 .two-cols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.1rem 2rem; /* más hueco vertical y horizontal */
+  gap: 1.1rem 2rem;
 }
 
 label {
@@ -103,12 +101,10 @@ textarea:focus {
   transform: translateY(-1px);
 }
 
-/* Descripción más bajita */
 textarea {
   min-height: 72px;
 }
 
-/* Grupo duración */
 .duration-group {
   display: flex;
   align-items: center;
@@ -124,7 +120,6 @@ textarea {
   color: #6b7280;
 }
 
-/* Tags */
 .tags-wrapper {
   display: flex;
   flex-direction: column;
@@ -174,7 +169,6 @@ textarea {
   color: #6b7280;
 }
 
-/* Botón guardar */
 #btnGuardarRuta {
   margin-top: 0.7rem;
   width: 100%;
@@ -206,7 +200,6 @@ textarea {
   filter: brightness(0.98);
 }
 
-/* Enlace volver */
 #volver {
   text-align: center;
   font-size: 0.9rem;

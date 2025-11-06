@@ -174,7 +174,6 @@
                 importante del recorrido.
               </p>
 
-              <!-- Bloque inferior pegado al fondo -->
               <div class="route-bottom">
                 <div
                   class="route-tags d-flex flex-wrap align-items-center gap-2"
@@ -251,7 +250,6 @@
                 importante del recorrido.
               </p>
 
-              <!-- Bloque inferior pegado al fondo -->
               <div class="route-bottom">
                 <div
                   class="route-tags d-flex flex-wrap align-items-center gap-2"
@@ -437,7 +435,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- JS para abrir/cerrar el popup de filtros -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const btnFiltros = document.getElementById("btnFiltros");
@@ -452,12 +449,10 @@
         btnFiltros.addEventListener("click", abrir);
         cerrarBtn.addEventListener("click", cerrar);
 
-        // Cerrar al hacer click en el fondo oscuro
         overlay.addEventListener("click", (e) => {
           if (e.target === overlay) cerrar();
         });
 
-        // Cerrar con ESC
         document.addEventListener("keydown", (e) => {
           if (e.key === "Escape") cerrar();
         });
