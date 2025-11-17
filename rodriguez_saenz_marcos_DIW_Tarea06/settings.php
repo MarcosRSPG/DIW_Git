@@ -177,7 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <label for="email_notifications">Notificaciones por correo</label>
       <div class="checkbox-group">
-        <!-- hidden para enviar 0 cuando no se marque -->
         <input type="hidden" name="email_notifications" value="0" />
         <label>
           <input

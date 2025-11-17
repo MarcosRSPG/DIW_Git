@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script defer src="./js/set-theme.js" type="module"></script>
   </head>
   <body class="<?php echo htmlspecialchars($bodyClass); ?>">
-    <!-- novalidate para evitar los popups nativos feos del navegador -->
+    
     <form id="formRegister" method="post" action="registro.php" novalidate>
       <h2 id="titulo">Crear cuenta</h2>
 

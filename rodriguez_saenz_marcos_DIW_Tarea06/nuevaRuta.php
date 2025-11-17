@@ -67,7 +67,7 @@ $tags = $stmt->fetchAll();
         />
       </div>
 
-      <!-- NUEVA SECCIÓN: DESCRIPCIÓN DE LA RUTA -->
+      
       <div class="field">
         <label for="description">Descripción de la ruta</label>
         <textarea
@@ -178,7 +178,7 @@ $tags = $stmt->fetchAll();
         </div>
       </div>
 
-      <!-- SECCIÓN: IMAGEN DE LA RUTA -->
+      
       <div class="field">
         <label for="route_image">Imagen de la ruta</label>
         <input

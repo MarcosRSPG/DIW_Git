@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const status = data.status; // 'like' | 'dislike' | 'none'
+      const status = data.status;
 
       if (likeBtn) {
         likeBtn.classList.toggle("route-action-btn--active", status === "like");
@@ -101,21 +101,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const likeBtn = card.querySelector(".route-action-btn-like");
     const dislikeBtn = card.querySelector(".route-action-btn-dislike");
 
-    // Abrir/cerrar panel de comentarios
     if (commentsBtn && commentsPanel) {
       commentsBtn.addEventListener("click", () => {
         commentsPanel.classList.toggle("is-open");
       });
     }
 
-    // Like
     if (likeBtn) {
       likeBtn.addEventListener("click", () => {
         sendReaction(routeId, "like", likeBtn, dislikeBtn);
       });
     }
 
-    // Dislike
     if (dislikeBtn) {
       dislikeBtn.addEventListener("click", () => {
         sendReaction(routeId, "dislike", likeBtn, dislikeBtn);
@@ -168,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const countSpan = panel?.querySelector(".route-comments-count");
         if (!list) return;
 
-        // Quitar mensaje "no hay comentarios" si existe
         const emptyMsg = list.querySelector(".no-comments-msg");
         if (emptyMsg) emptyMsg.remove();
 
@@ -194,16 +190,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
 
-        // Insertar al principio
         list.prepend(commentEl);
 
-        // Actualizar contador
         if (countSpan) {
           const current = parseInt(countSpan.textContent || "0", 10) || 0;
           countSpan.textContent = current + 1;
         }
 
-        // Limpiar textarea
         textarea.value = "";
       } catch (err) {
         console.error(err);
@@ -211,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Botón Cancelar: cierra panel y limpia textarea
     const cancelBtn = form.querySelector(".js-comment-cancel");
     if (cancelBtn) {
       cancelBtn.addEventListener("click", () => {
@@ -227,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnLimpiar = document.getElementById("btnLimpiarFiltros");
   if (btnLimpiar) {
     btnLimpiar.addEventListener("click", () => {
-      // Recarga index.php sin query string (borra búsqueda, filtros y página)
       window.location.href = "index.php";
     });
   }

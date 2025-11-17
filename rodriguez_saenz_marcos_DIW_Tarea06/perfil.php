@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       <?php } ?>
 
-      <!-- DATOS DE LA CUENTA -->
+      
       <div class="section-card">
         <div class="section-card-title">Datos de la cuenta</div>
 
@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         />
       </div>
 
-      <!-- CONTRASEÑA -->
+      
       <div class="section-card">
         <div class="section-card-title">Contraseña</div>
 
@@ -258,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
       </div>
 
-      <!-- ELIMINAR CUENTA -->
+      
       <div class="section-card section-card-danger">
         <div class="section-card-title">Eliminar cuenta</div>
 
@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
 
-      <!-- BOTONES PRINCIPALES -->
+      
       <div class="actions-row">
         <button type="submit" id="btnGuardar" name="action" value="save">
           Guardar cambios

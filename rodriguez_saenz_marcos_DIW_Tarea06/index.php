@@ -3,9 +3,6 @@ session_start();
 require_once __DIR__.'/php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-/* =========================================================
-   TEMA (light / dark / system)
-   ========================================================= */
 $theme = $_SESSION['theme'] ?? 'system';
 
 if ($theme === 'system') {
@@ -14,35 +11,24 @@ if ($theme === 'system') {
 }
 $bodyClass = ($theme === 'dark') ? 'theme-dark' : 'theme-light';
 
-/* =========================================================
-   BÚSQUEDA + FILTROS (GET)
-   ========================================================= */
-
-// Búsqueda por texto (título / descripción)
 $q = trim($_GET['q'] ?? '');
 
-// Dificultad (array)
 $difficulties = $_GET['difficulty'] ?? [];
 if (!is_array($difficulties)) {
     $difficulties = [$difficulties];
 }
 
-// Fechas
 $dateFrom = $_GET['date_from'] ?? '';
 $dateTo = $_GET['date_to'] ?? '';
 
-// Duración (horas)
 $minHours = $_GET['min_hours'] ?? '';
 $maxHours = $_GET['max_hours'] ?? '';
 
-// Tags seleccionados
 $tagsFilter = $_GET['tags'] ?? [];
 if (!is_array($tagsFilter)) {
     $tagsFilter = [$tagsFilter];
 }
-/* =========================================================
-   LISTA DE TAGS DESDE LA BASE DE DATOS (solo los usados en rutas)
-   ========================================================= */
+
 $allTags = [];
 try {
     $stmtAllTags = $pdo->query('
@@ -56,10 +42,7 @@ try {
     $allTags = [];
 }
 
-/* =========================================================
-   Paginación: nº rutas por página desde user_settings
-   ========================================================= */
-$itemsPerPage = 10; // por defecto
+$itemsPerPage = 10;
 
 if (isset($_SESSION['user_id'])) {
     $userId = (int) $_SESSION['user_id'];
@@ -71,23 +54,17 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
-// Página actual
 $page = max(1, (int) ($_GET['page'] ?? 1));
 
-/* =========================================================
-   Construir filtros dinámicamente (WHERE / JOIN)
-   ========================================================= */
 $where = [];
 $params = [];
 $joinTags = '';
 
-// Búsqueda por texto
 if ($q !== '') {
     $where[] = '(r.title LIKE :q OR r.description LIKE :q)';
     $params[':q'] = '%'.$q.'%';
 }
 
-// Dificultad
 $allowedDiffs = ['facil', 'media', 'dificil', 'experto'];
 $difficulties = array_map('strtolower', array_map('trim', $difficulties));
 $difficulties = array_values(array_intersect($difficulties, $allowedDiffs));
@@ -102,7 +79,6 @@ if (!empty($difficulties)) {
     $where[] = 'r.difficulty IN ('.implode(',', $diffPlaceholders).')';
 }
 
-// Fechas
 if ($dateFrom !== '') {
     $where[] = 'r.route_date >= :date_from';
     $params[':date_from'] = $dateFrom;
@@ -112,7 +88,6 @@ if ($dateTo !== '') {
     $params[':date_to'] = $dateTo;
 }
 
-// Duración (usa solo horas, simple)
 if ($minHours !== '' && is_numeric($minHours)) {
     $where[] = 'r.time_hours >= :min_hours';
     $params[':min_hours'] = (int) $minHours;
@@ -122,7 +97,6 @@ if ($maxHours !== '' && is_numeric($maxHours)) {
     $params[':max_hours'] = (int) $maxHours;
 }
 
-// Tags: rutas que tengan AL MENOS uno de los tags seleccionados
 $tagsFilter = array_filter(array_map('trim', $tagsFilter));
 if (!empty($tagsFilter)) {
     $joinTags = ' 
@@ -141,9 +115,6 @@ if (!empty($tagsFilter)) {
 
 $whereSql = $where ? (' WHERE '.implode(' AND ', $where)) : '';
 
-/* =========================================================
-   TOTAL DE RUTAS (para paginación)
-   ========================================================= */
 $sqlCount = '
     SELECT COUNT(DISTINCT r.id)
     FROM routes r
@@ -161,15 +132,11 @@ if ($totalRoutes === 0) {
     $totalPages = (int) ceil($totalRoutes / $itemsPerPage);
 }
 
-// Ajustar página si se va de rango
 if ($page > $totalPages) {
     $page = $totalPages;
 }
 $offset = ($page - 1) * $itemsPerPage;
 
-/* =========================================================
-   CONSULTA DE RUTAS CON LIMIT/OFFSET
-   ========================================================= */
 $sqlRoutes = '
     SELECT 
         r.id,
@@ -195,29 +162,23 @@ $sqlRoutes = '
 
 $stmtRoutes = $pdo->prepare($sqlRoutes);
 
-// Vinculamos primero los filtros
 foreach ($params as $key => $value) {
     $stmtRoutes->bindValue($key, $value);
 }
-// Y luego limit / offset como enteros
+
 $stmtRoutes->bindValue(':limit', $itemsPerPage, PDO::PARAM_INT);
 $stmtRoutes->bindValue(':offset', $offset, PDO::PARAM_INT);
 
 $stmtRoutes->execute();
 $routes = $stmtRoutes->fetchAll(PDO::FETCH_ASSOC);
 
-/* =========================================================
-   TAGS Y COMENTARIOS POR RUTA
-   ========================================================= */
 $routeIds = array_column($routes, 'id');
 $tagsByRoute = [];
 $commentsByRoute = [];
 
-// Reacciones del usuario (like/dislike)
 $userReactions = [];
 
 if (!empty($routeIds)) {
-    // LIKE / DISLIKE
     if (isset($_SESSION['user_id'])) {
         $userId = (int) $_SESSION['user_id'];
         $idList = implode(',', array_map('intval', $routeIds));
@@ -236,7 +197,6 @@ if (!empty($routeIds)) {
         }
     }
 
-    // TAGS
     $inPlaceholders = implode(',', array_fill(0, count($routeIds), '?'));
     $stmtTags = $pdo->prepare("
         SELECT rt.route_id, t.name
@@ -252,7 +212,6 @@ if (!empty($routeIds)) {
         $tagsByRoute[$rid][] = $row['name'];
     }
 
-    // COMENTARIOS
     $stmtComments = $pdo->prepare("
         SELECT 
             c.id,
@@ -273,9 +232,6 @@ if (!empty($routeIds)) {
     }
 }
 
-/* =========================================================
-   FUNCIONES AUXILIARES
-   ========================================================= */
 function formatDateShort(?string $date): string
 {
     if (!$date || $date === '0000-00-00') {
@@ -332,13 +288,9 @@ function initialFromName(string $name): string
     return strtoupper(substr($name, 0, 1));
 }
 
-// Error de comentario (si viene de un POST sin AJAX)
 $commentError = $_SESSION['comment_error'] ?? '';
 unset($_SESSION['comment_error']);
 
-/* =========================================================
-   Para mantener parámetros en la paginación (menos page)
-   ========================================================= */
 $baseQuery = $_GET;
 unset($baseQuery['page']);
 ?>
@@ -449,7 +401,7 @@ $userInitial = $isLoggedIn ? initialFromName($userName) : '';
             </a>
           </div>
 
-          <!-- BÚSQUEDA POR TEXTO (título/descripcion) -->
+          
           <form
             class="d-flex align-items-center ms-auto"
             role="search"
@@ -485,6 +437,15 @@ $userInitial = $isLoggedIn ? initialFromName($userName) : '';
               <i class="bi bi-search"></i>
             </button>
           </form>
+          <a
+      href="mapa.php"
+      class="btn btn-sm btn-outline-light ms-3 d-none d-md-inline-flex align-items-center"
+      aria-label="Mapa del sitio"
+      title="Mapa del sitio"
+    >
+      <i class="bi bi-diagram-3-fill me-1"></i>
+      Mapa
+    </a>
         </div>
       </nav>
 
@@ -566,7 +527,7 @@ $routeId = (int) $route['id'];
             $currentReaction = $userReactions[$routeId] ?? 'none';
             ?>
 
-          <!-- ======================= TARJETA DE RUTA ======================= -->
+          
           <article class="route-card mb-3" data-route-id="<?php echo $routeId; ?>">
             <div class="row g-3 align-items-start route-content">
               <div class="col-md">
@@ -672,7 +633,7 @@ $routeId = (int) $route['id'];
             </div>
           </article>
 
-          <!-- ======================= PANEL DE COMENTARIOS DE ESA RUTA ======================= -->
+          
           <div class="route-comments-panel" data-route-id="<?php echo $routeId; ?>">
             <div class="route-comments-header">
               <div class="route-comments-title">
@@ -717,7 +678,7 @@ $routeId = (int) $route['id'];
             </div>
 
             <?php if (isset($_SESSION['user_id'])) { ?>
-              <!-- Formulario nuevo comentario (AJAX) -->
+              
               <form
                 class="route-comment-new comment-form"
                 method="post"
@@ -760,11 +721,11 @@ $routeId = (int) $route['id'];
           </div>
         <?php } ?>
 
-        <!-- ======================= PAGINACIÓN ======================= -->
+        
         <?php if ($totalRoutes > 0 && $totalPages > 1) { ?>
           <nav aria-label="Paginación de rutas" class="mt-4 d-flex justify-content-center">
             <ul class="pagination mb-0">
-              <!-- Anterior -->
+              
               <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
                 <a
                   class="page-link"
@@ -796,7 +757,7 @@ $routeId = (int) $route['id'];
                 </li>
               <?php } ?>
 
-              <!-- Siguiente -->
+              
               <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
                 <a
                   class="page-link"
@@ -819,7 +780,7 @@ $routeId = (int) $route['id'];
       <?php } ?>
     </main>
 
-    <!-- ======================= OVERLAY FILTROS ======================= -->
+    
     <div id="filtersOverlay" class="filters-overlay">
       <div class="filters-modal">
         <button
@@ -840,7 +801,7 @@ $routeId = (int) $route['id'];
           action="index.php"
           class="filters-form"
         >
-          <!-- Mantener texto de búsqueda dentro de los filtros -->
+          
           <input type="hidden" name="q" value="<?php echo htmlspecialchars($q); ?>" />
 
           <div class="filters-field filters-full">
@@ -965,7 +926,7 @@ $routeId = (int) $route['id'];
   <button type="submit" class="btn btn-success px-4">
     Aplicar filtros
   </button>
-  <!-- botón limpiar: recarga index.php SIN parámetros -->
+  
   <button
     type="button"
     id="btnLimpiarFiltros"
