@@ -30,7 +30,12 @@ $tags = $stmt->fetchAll();
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Crear nueva ruta</title>
+    <title>Crear nueva ruta de montaña | Rutas de Monte</title>
+
+<meta name="description" content="Publica una nueva ruta de montaña: añade título, descripción, fecha, dificultad, duración, etiquetas y una imagen para compartirla con otros senderistas.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://rutasmonte.com/nuevaRuta.php">
+
     <script defer src="./js/set-theme.js" type="module"></script>
 
     <link rel="preconnect" href="https:

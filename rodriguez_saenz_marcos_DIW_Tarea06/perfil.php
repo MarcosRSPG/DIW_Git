@@ -163,7 +163,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Ajustes de la cuenta</title>
+    <title>Perfil y datos de la cuenta | Rutas de Monte</title>
+
+<meta name="description" content="Edita tu nombre de usuario, correo y contraseña, o elimina tu cuenta desde la sección de perfil en Rutas de Monte.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://rutasmonte.com/perfil.php">
+
 
     <link rel="preconnect" href="https:
     <link rel="preconnect" href="https:

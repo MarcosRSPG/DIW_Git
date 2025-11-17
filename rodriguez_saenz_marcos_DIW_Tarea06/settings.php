@@ -94,7 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Ajustes de la cuenta</title>
+    <title>Ajustes de apariencia y notificaciones | Rutas de Monte</title>
+
+<meta name="description" content="Configura el tema claro u oscuro, el número de rutas por página y las notificaciones por email en tu cuenta de Rutas de Monte.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://rutasmonte.com/settings.php">
+
     <script defer src="./js/set-theme.js" type="module"></script>
 
     <link rel="preconnect" href="https:

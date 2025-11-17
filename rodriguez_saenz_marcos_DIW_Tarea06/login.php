@@ -60,7 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="./sytleLogin.css" />
-  <title>Login</title>
+  <title>Iniciar sesión | Rutas de Monte</title>
+
+<meta name="description" content="Accede a tu cuenta para guardar rutas de montaña, comentar y gestionar tus preferencias en Rutas de Monte.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://rutasmonte.com/login.php">
+
   <script defer src="./js/set-theme.js" type="module"></script>
 
 </head>

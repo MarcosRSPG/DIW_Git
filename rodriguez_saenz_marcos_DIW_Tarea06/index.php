@@ -353,7 +353,24 @@ $userInitial = $isLoggedIn ? initialFromName($userName) : '';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rutas de montaña</title>
+    <title>Rutas de montaña y senderismo | Rutas de Monte</title>
+
+<meta name="description" content="Descubre y comparte rutas de montaña y senderismo. Filtra por dificultad, fecha y duración, añade comentarios y guarda tus rutas favoritas en Rutas de Monte.">
+
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rutasmonte.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rutas de montaña y senderismo | Rutas de Monte">
+<meta property="og:description" content="Explora rutas de montaña con fotos, dificultad, duración y comentarios de otros usuarios.">
+<meta property="og:url" content="https://rutasmonte.com/">
+<meta property="og:image" content="https://rutasmonte.com/img/vini-intro.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rutas de montaña y senderismo | Rutas de Monte">
+<meta name="twitter:description" content="Comparte y descubre rutas de senderismo con información detallada y comentarios.">
+<meta name="twitter:image" content="https://rutasmonte.com/img/vini-intro.jpg">
+
 
     <script defer src="./js/index.js" type="module"></script>
     <script defer src="./js/set-theme.js" type="module"></script>

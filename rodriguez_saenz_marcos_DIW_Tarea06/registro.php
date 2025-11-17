@@ -109,7 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Registro</title>
+    <title>Crear cuenta | Rutas de Monte</title>
+
+<meta name="description" content="Crea una cuenta gratis para descubrir, guardar y compartir rutas de montaña y senderismo con la comunidad.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://rutasmonte.com/registro.php">
+
     <link rel="preconnect" href="https:
     <link rel="preconnect" href="https:
     <link

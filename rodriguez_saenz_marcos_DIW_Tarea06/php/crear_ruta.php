@@ -88,7 +88,10 @@ if (!empty($errors)) {
     <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Errores al crear la ruta</title>
+        <title>Error al crear la ruta | Rutas de Monte</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Se ha producido un error al crear la ruta de montaña. Revisa los campos obligatorios o el formato de la imagen e inténtalo de nuevo.">
+
     </head>
     <body>
         <h1>Se han producido errores</h1>
