@@ -1,22 +1,19 @@
 <?php
-// login.php
+
 session_start();
 require_once './php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-// theme viene de la configuración del usuario (tabla user_settings + sesión)
 $theme = $_SESSION['theme'] ?? 'system';
 
-// Si el usuario ha elegido "system", usamos lo que detectamos con JS
 if ($theme === 'system') {
-    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
-    $theme = $systemTheme; // ahora 'light' o 'dark'
+    $systemTheme = $_SESSION['system_theme'] ?? 'light';
+    $theme = $systemTheme;
 }
 
 if ($theme === 'dark') {
     $bodyClass = 'theme-dark';
 } else {
-    // cualquier cosa que no sea dark -> light
     $bodyClass = 'theme-light';
 }
 
@@ -24,13 +21,11 @@ $bodyClass = $theme === 'dark' ? 'theme-dark' : 'theme-light';
 
 $error = '';
 
-// Si ya está logueado, puedes redirigirlo si quieres
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit;
 }
 
-// Procesar el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -38,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($name === '' || $password === '') {
         $error = 'Por favor, rellena usuario y contraseña.';
     } else {
-        // Buscar usuario por nombre (si prefieres por email, se puede adaptar)
         $stmt = $pdo->prepare(
             'SELECT id, name, email, password_hash 
              FROM users 
@@ -49,12 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password_hash'])) {
-            // Login correcto: guardar datos en la sesión
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
 
-            // Redirige a la página principal (ajusta si es index.php / index.html)
             header('Location: index.php');
             exit;
         } else {

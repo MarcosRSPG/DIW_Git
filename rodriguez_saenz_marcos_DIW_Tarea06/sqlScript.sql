@@ -7,9 +7,9 @@ CREATE DATABASE IF NOT EXISTS mis_rutas
 
 USE mis_rutas;
 
--- =====================
--- USUARIOS
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS users (
    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    name           VARCHAR(100) NOT NULL,
@@ -20,9 +20,9 @@ CREATE TABLE IF NOT EXISTS users (
                                    ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- =====================
--- AJUSTES DE USUARIO
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS user_settings (
    id                        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    user_id                   INT UNSIGNED NOT NULL UNIQUE,
@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS user_settings (
    INDEX idx_user_settings_user (user_id)
 ) ENGINE=InnoDB;
 
--- =====================
--- RUTAS
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS routes (
    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    user_id            INT UNSIGNED NOT NULL,
@@ -64,9 +64,9 @@ CREATE TABLE IF NOT EXISTS routes (
    INDEX idx_routes_difficulty (difficulty)
 ) ENGINE=InnoDB;
 
--- =====================
--- TAGS
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS tags (
    id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    name       VARCHAR(100) NOT NULL UNIQUE,
@@ -74,9 +74,9 @@ CREATE TABLE IF NOT EXISTS tags (
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- =====================
--- RELACIÓN RUTAS - TAGS (N:M)
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS route_tags (
    route_id INT UNSIGNED NOT NULL,
    tag_id   INT UNSIGNED NOT NULL,
@@ -91,9 +91,9 @@ CREATE TABLE IF NOT EXISTS route_tags (
    INDEX idx_route_tags_tag (tag_id)
 ) ENGINE=InnoDB;
 
--- =====================
--- COMENTARIOS
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS comments (
    id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    route_id   INT UNSIGNED NOT NULL,
@@ -110,14 +110,14 @@ CREATE TABLE IF NOT EXISTS comments (
    INDEX idx_comments_user (user_id)
 ) ENGINE=InnoDB;
 
--- =====================
--- LIKES / DISLIKES DE RUTAS
--- =====================
+
+
+
 CREATE TABLE IF NOT EXISTS li_dis_route (
    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    user_id            INT UNSIGNED NOT NULL,
    route_id           INT UNSIGNED NOT NULL,
-   dis_li             BOOLEAN NOT NULL, -- TRUE = like, FALSE = dislike
+   dis_li             BOOLEAN NOT NULL, 
    created_at         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    CONSTRAINT fk_li_dis_user
      FOREIGN KEY (user_id) REFERENCES users(id)
@@ -130,25 +130,25 @@ CREATE TABLE IF NOT EXISTS li_dis_route (
    INDEX idx_li_dis_route (route_id)
 ) ENGINE=InnoDB;
 
--- Aseguramos UTF-8 en la conexión
+
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
 USE mis_rutas;
 
--- =========================================
--- 1) USUARIOS
--- =========================================
-INSERT INTO users (id, name, email, password_hash, created_at, updated_at) VALUES
-(1, 'Marcos', 'marcos@example.com', '$2b$12$bgZLwzusFKcuyJzH7WMuOexBaSwdmtoKu5ogmZoZG1521SzCby95K', NOW(), NOW()), -- Password123!
-(2, 'Laura',  'laura@example.com',  '$2b$12$HZ.rt6HKThRWFKkti4qGGuoFamynMbo2HBCxIfPh.gV0TY18upYJu', NOW(), NOW()), -- Senderista1!
-(3, 'Carlos', 'carlos@example.com', '$2b$12$Z7jUtzPGVmeO18mndeC.i.XRD5XuwqJXkPfHZVMwvpQiawsr0.KUC', NOW(), NOW()), -- RutaFacil1!
-(4, 'Ana',    'ana@example.com',    '$2b$12$YJoK/qDu632CQC/7g4.yXuTnIrKPCE0HY4uOG268fXpmhS9Qi7EKi', NOW(), NOW()), -- RutaMedia2!
-(5, 'Admin',  'admin@example.com',  '$2b$12$AoXNzGKCDEoS0bPnTv43uu4vq3PXcCZsgHLBjUHZUbDcmfcYZxMkO', NOW(), NOW()); -- Admin123!
 
--- =========================================
--- 2) AJUSTES DE USUARIO
--- =========================================
+
+
+INSERT INTO users (id, name, email, password_hash, created_at, updated_at) VALUES
+(1, 'Marcos', 'marcos@example.com', '$2b$12$bgZLwzusFKcuyJzH7WMuOexBaSwdmtoKu5ogmZoZG1521SzCby95K', NOW(), NOW()), 
+(2, 'Laura',  'laura@example.com',  '$2b$12$HZ.rt6HKThRWFKkti4qGGuoFamynMbo2HBCxIfPh.gV0TY18upYJu', NOW(), NOW()), 
+(3, 'Carlos', 'carlos@example.com', '$2b$12$Z7jUtzPGVmeO18mndeC.i.XRD5XuwqJXkPfHZVMwvpQiawsr0.KUC', NOW(), NOW()), 
+(4, 'Ana',    'ana@example.com',    '$2b$12$YJoK/qDu632CQC/7g4.yXuTnIrKPCE0HY4uOG268fXpmhS9Qi7EKi', NOW(), NOW()), 
+(5, 'Admin',  'admin@example.com',  '$2b$12$AoXNzGKCDEoS0bPnTv43uu4vq3PXcCZsgHLBjUHZUbDcmfcYZxMkO', NOW(), NOW()); 
+
+
+
+
 INSERT INTO user_settings (user_id, theme, items_per_page, email_notifications, created_at, updated_at) VALUES
 (1, 'dark',   5,  1, NOW(), NOW()),
 (2, 'light', 10, 1, NOW(), NOW()),
@@ -156,9 +156,9 @@ INSERT INTO user_settings (user_id, theme, items_per_page, email_notifications, 
 (4, 'dark',  20, 1, NOW(), NOW()),
 (5, 'light', 50, 0, NOW(), NOW());
 
--- =========================================
--- 3) TAGS
--- =========================================
+
+
+
 INSERT INTO tags (id, name, slug, created_at) VALUES
 (1,  'Bosque',           'bosque',           NOW()),
 (2,  'Montaña',          'montana',          NOW()),
@@ -173,9 +173,9 @@ INSERT INTO tags (id, name, slug, created_at) VALUES
 (11, 'Sendero local',    'sendero-local',    NOW()),
 (12, 'Alta montaña',     'alta-montana',     NOW());
 
--- =========================================
--- 4) RUTAS (30 rutas)
--- =========================================
+
+
+
 INSERT INTO routes
 (id, user_id, title, description, route_date, start_location, end_location,
  time_hours, time_minutes, difficulty, photo_path, created_at, updated_at)
@@ -271,9 +271,9 @@ VALUES
  'Ascensión madrugadora para ver amanecer desde la cumbre.',
  '2024-07-20', 'Parking Amanecer', 'Cumbre del Amanecer', 5, 30, 'media', './img/montanas-intro.jpg', NOW(), NOW());
 
--- =========================================
--- 5) RELACIÓN RUTAS - TAGS
--- =========================================
+
+
+
 INSERT INTO route_tags (route_id, tag_id) VALUES
 (1,  2), (1, 5), (1,10),
 (2,  1), (2, 7),
@@ -306,9 +306,9 @@ INSERT INTO route_tags (route_id, tag_id) VALUES
 (29, 3), (29,11),
 (30, 2), (30,10), (30, 8);
 
--- =========================================
--- 6) COMENTARIOS
--- =========================================
+
+
+
 INSERT INTO comments (route_id, user_id, content, created_at) VALUES
 (1, 1, 'Ruta muy completa, las vistas desde la parte alta son increíbles.',        NOW() - INTERVAL 10 DAY),
 (1, 2, 'Subida suave, perfecta para un día tranquilo.',                           NOW() - INTERVAL 9 DAY),
@@ -327,9 +327,9 @@ INSERT INTO comments (route_id, user_id, content, created_at) VALUES
 (14,5, 'Las cascadas son pequeñas pero muy bonitas.',                              NOW()),
 (15,1, 'Ruta muy exigente, las tres cimas en un día se notan en las piernas.',     NOW());
 
--- =========================================
--- 7) LIKES / DISLIKES
--- =========================================
+
+
+
 INSERT INTO li_dis_route (user_id, route_id, dis_li, created_at) VALUES
 (1, 1, 1, NOW()),
 (1, 4, 0, NOW()),

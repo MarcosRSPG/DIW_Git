@@ -1,30 +1,21 @@
 <?php
-// registro.php
+
 session_start();
 require_once './php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-// theme viene de la configuración del usuario (tabla user_settings + sesión)
 $theme = $_SESSION['theme'] ?? 'system';
 
-// Si el usuario ha elegido "system", usamos lo que detectamos con JS
 if ($theme === 'system') {
-    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
-    $theme = $systemTheme; // ahora 'light' o 'dark'
+    $systemTheme = $_SESSION['system_theme'] ?? 'light';
+    $theme = $systemTheme;
 }
 
-// Clase para el body según tema
 $bodyClass = ($theme === 'dark') ? 'theme-dark' : 'theme-light';
 
 $errors = [];
 $name = '';
 $email = '';
-
-// Si el usuario ya está logueado, podrías redirigirlo si quieres
-// if (isset($_SESSION['user_id'])) {
-//     header('Location: index.php');
-//     exit;
-// }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
@@ -32,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $password_confirm = $_POST['password_confirm'] ?? '';
 
-    // Validaciones básicas
     if ($name === '') {
         $errors[] = 'El nombre de usuario es obligatorio.';
     }
@@ -51,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Las contraseñas no coinciden.';
     }
 
-    // Si no hay errores de validación, comprobamos si el usuario ya existe
     if (empty($errors)) {
         $stmt = $pdo->prepare(
             'SELECT id, email, name 
@@ -75,14 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Si sigue sin errores, creamos el usuario
     if (empty($errors)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         try {
             $pdo->beginTransaction();
 
-            // Insertar usuario
             $stmt = $pdo->prepare(
                 'INSERT INTO users (name, email, password_hash) 
                  VALUES (:name, :email, :password_hash)'
@@ -95,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $userId = (int) $pdo->lastInsertId();
 
-            // Crear fila en user_settings con valores por defecto
             $stmt = $pdo->prepare(
                 'INSERT INTO user_settings (user_id) 
                  VALUES (:user_id)'
@@ -106,18 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pdo->commit();
 
-            // Iniciar sesión automáticamente
             $_SESSION['user_id'] = $userId;
             $_SESSION['user_name'] = $name;
             $_SESSION['user_email'] = $email;
 
-            // Redirigir a la página principal
             header('Location: index.php');
             exit;
         } catch (Exception $e) {
             $pdo->rollBack();
             $errors[] = 'Ha ocurrido un error al crear la cuenta. Inténtalo de nuevo más tarde.';
-            // Aquí podrías loguear $e->getMessage()
         }
     }
 }
@@ -127,10 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <head>
     <meta charset="UTF-8" />
     <title>Registro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https:
+    <link rel="preconnect" href="https:
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https:
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styleRegister.css" />

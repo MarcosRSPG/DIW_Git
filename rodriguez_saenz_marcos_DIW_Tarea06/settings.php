@@ -1,28 +1,24 @@
 <?php
-// settings.php
+
 session_start();
 require_once __DIR__.'/php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-// theme viene de la configuración del usuario (tabla user_settings + sesión)
 $theme = $_SESSION['theme'] ?? 'system';
 
-// Si el usuario ha elegido "system", usamos lo que detectamos con JS
 if ($theme === 'system') {
-    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
-    $theme = $systemTheme; // ahora 'light' o 'dark'
+    $systemTheme = $_SESSION['system_theme'] ?? 'light';
+    $theme = $systemTheme;
 }
 
 if ($theme === 'dark') {
     $bodyClass = 'theme-dark';
 } else {
-    // cualquier cosa que no sea dark -> light
     $bodyClass = 'theme-light';
 }
 
 $bodyClass = $theme === 'dark' ? 'theme-dark' : 'theme-light';
 
-// Obligar a estar logueado
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -32,7 +28,6 @@ $userId = (int) $_SESSION['user_id'];
 $errors = [];
 $success = '';
 
-// ====== Cargar ajustes actuales ======
 $stmt = $pdo->prepare(
     'SELECT theme, items_per_page, email_notifications
      FROM user_settings
@@ -42,32 +37,27 @@ $stmt = $pdo->prepare(
 $stmt->execute([':user_id' => $userId]);
 $currentSettings = $stmt->fetch();
 
-// Valores por defecto si no hay fila aún
 $theme = $currentSettings['theme'] ?? 'system';
 $itemsPerPage = $currentSettings['items_per_page'] ?? 10;
 $emailNotifications = isset($currentSettings['email_notifications'])
     ? (bool) $currentSettings['email_notifications']
     : true;
 
-// Normalizar theme a uno válido
 $allowedThemes = ['light', 'dark', 'system'];
 if (!in_array($theme, $allowedThemes, true)) {
     $theme = 'system';
 }
 
-// ====== Procesar POST ======
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $themePost = $_POST['theme'] ?? 'system';
     $itemsPost = $_POST['items_per_page'] ?? 10;
-    $emailPost = $_POST['email_notifications'] ?? 0; // viene 0 o 1
+    $emailPost = $_POST['email_notifications'] ?? 0;
     $emailPostBool = $emailPost ? 1 : 0;
 
-    // Validar theme
     if (!in_array($themePost, $allowedThemes, true)) {
         $errors[] = 'Tema seleccionado no válido.';
     }
 
-    // Validar items_per_page
     $itemsPost = (int) $itemsPost;
     $validItems = [5, 10, 20, 50];
     if (!in_array($itemsPost, $validItems, true)) {
@@ -75,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        // Insertar o actualizar settings
         $stmt = $pdo->prepare(
             'INSERT INTO user_settings (user_id, theme, items_per_page, email_notifications)
              VALUES (:user_id, :theme, :items_per_page, :email_notifications)
@@ -95,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $success = 'Ajustes guardados correctamente.';
 
-        // Actualizar variables para reflejar lo guardado
         $theme = $themePost;
         $itemsPerPage = $itemsPost;
         $emailNotifications = (bool) $emailPostBool;
@@ -109,10 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Ajustes de la cuenta</title>
     <script defer src="./js/set-theme.js" type="module"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https:
+    <link rel="preconnect" href="https:
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https:
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styleSettings.css" />

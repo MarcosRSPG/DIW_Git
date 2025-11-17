@@ -3,31 +3,26 @@ session_start();
 require_once __DIR__.'/php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-// theme viene de la configuración del usuario (tabla user_settings + sesión)
 $theme = $_SESSION['theme'] ?? 'system';
 
-// Si el usuario ha elegido "system", usamos lo que detectamos con JS
 if ($theme === 'system') {
-    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
-    $theme = $systemTheme; // ahora 'light' o 'dark'
+    $systemTheme = $_SESSION['system_theme'] ?? 'light';
+    $theme = $systemTheme;
 }
 
 if ($theme === 'dark') {
     $bodyClass = 'theme-dark';
 } else {
-    // cualquier cosa que no sea dark -> light
     $bodyClass = 'theme-light';
 }
 
 $bodyClass = $theme === 'dark' ? 'theme-dark' : 'theme-light';
 
-// Opcional: obligar a estar logueado para crear rutas
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Cargar tags existentes desde la base de datos
 $stmt = $pdo->query('SELECT id, name, slug FROM tags ORDER BY name ASC');
 $tags = $stmt->fetchAll();
 ?>
@@ -38,10 +33,10 @@ $tags = $stmt->fetchAll();
     <title>Crear nueva ruta</title>
     <script defer src="./js/set-theme.js" type="module"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https:
+    <link rel="preconnect" href="https:
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https:
       rel="stylesheet"
     />
     <script defer src="./js/newRuta.js" type="module"></script>
@@ -156,7 +151,7 @@ $tags = $stmt->fetchAll();
               <?php if (!empty($tags)) { ?>
                 <?php foreach ($tags as $tag) { ?>
                   <?php
-                    // Si no hubiera slug, generamos uno rápido a partir del nombre
+
                     $slug = $tag['slug'] ?: strtolower(str_replace(' ', '_', $tag['name']));
                     ?>
                   <option value="<?php echo htmlspecialchars($slug); ?>">

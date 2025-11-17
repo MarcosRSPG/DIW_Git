@@ -3,7 +3,6 @@ session_start();
 require_once __DIR__.'/php/config.php';
 header('Content-Type: text/html; charset=UTF-8');
 
-// Si no hay usuario logueado, redirigimos al login
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -13,28 +12,20 @@ $userId = (int) $_SESSION['user_id'];
 $errors = [];
 $success = '';
 
-// ============================
-// TEMA (light / dark / system)
-// ============================
 $theme = $_SESSION['theme'] ?? 'system';
 
-// Si el usuario ha elegido "system", usamos lo que detectamos con JS
 if ($theme === 'system') {
-    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
-    $theme = $systemTheme; // ahora 'light' o 'dark'
+    $systemTheme = $_SESSION['system_theme'] ?? 'light';
+    $theme = $systemTheme;
 }
 
 $bodyClass = ($theme === 'dark') ? 'theme-dark' : 'theme-light';
 
-// ============================
-// Cargar datos actuales usuario
-// ============================
 $stmt = $pdo->prepare('SELECT id, name, email, password_hash FROM users WHERE id = :id LIMIT 1');
 $stmt->execute([':id' => $userId]);
 $currentUser = $stmt->fetch();
 
 if (!$currentUser) {
-    // Usuario no encontrado: cerramos sesión por seguridad
     session_unset();
     session_destroy();
     header('Location: login.php');
@@ -44,13 +35,9 @@ if (!$currentUser) {
 $username = $currentUser['name'];
 $email = $currentUser['email'];
 
-// ============================
-// Procesar formulario (POST)
-// ============================
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? 'save';
 
-    // ---- Cerrar sesión ----
     if ($action === 'logout') {
         session_unset();
         session_destroy();
@@ -58,27 +45,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // ---- Eliminar usuario ----
     if ($action === 'delete') {
         $confirmDelete = trim($_POST['confirm_delete'] ?? '');
         if ($confirmDelete !== 'ELIMINAR') {
             $errors[] = 'Debes escribir "ELIMINAR" para confirmar el borrado de la cuenta.';
         } else {
-            // Borramos el usuario; rutas/comentarios/likes se borran por ON DELETE CASCADE
             $delStmt = $pdo->prepare('DELETE FROM users WHERE id = :id LIMIT 1');
             $delStmt->execute([':id' => $userId]);
 
             session_unset();
             session_destroy();
 
-            header('Location: index.php'); // o login.php, como prefieras
+            header('Location: index.php');
             exit;
         }
     }
 
-    // ---- Guardar cambios ----
     if ($action === 'save') {
-        // Nuevos valores enviados desde el formulario
         $username = trim($_POST['username'] ?? '');
         $email = trim($_POST['email'] ?? '');
 
@@ -86,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newPassword = $_POST['new_password'] ?? '';
         $confirmPassword = $_POST['confirm_password'] ?? '';
 
-        // Validación básica de nombre/email
         if ($username === '') {
             $errors[] = 'El nombre de usuario no puede estar vacío.';
         }
@@ -97,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'El formato del correo electrónico no es válido.';
         }
 
-        // Comprobar email duplicado (otro usuario con ese email)
         if (empty($errors)) {
             $checkStmt = $pdo->prepare('SELECT id FROM users WHERE email = :email AND id <> :id LIMIT 1');
             $checkStmt->execute([
@@ -109,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // ¿Quiere cambiar la contraseña?
         $wantsPasswordChange = (
             $currentPassword !== ''
             || $newPassword !== ''
@@ -117,16 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($wantsPasswordChange && empty($errors)) {
-            // Si quiere cambiarla, todos los campos de contraseña deben estar rellenos
             if ($currentPassword === '' || $newPassword === '' || $confirmPassword === '') {
                 $errors[] = 'Para cambiar la contraseña debes rellenar todos los campos de contraseña.';
             } else {
-                // Verificar contraseña actual
                 if (!password_verify($currentPassword, $currentUser['password_hash'])) {
                     $errors[] = 'La contraseña actual no es correcta.';
                 }
 
-                // Validar nueva contraseña
                 if (strlen($newPassword) < 8) {
                     $errors[] = 'La nueva contraseña debe tener al menos 8 caracteres.';
                 }
@@ -137,10 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Si no hay errores, actualizamos en la BBDD
         if (empty($errors)) {
             if ($wantsPasswordChange) {
-                // Actualizar también la contraseña
                 $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
 
                 $sql = 'UPDATE users 
@@ -159,7 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $currentUser['password_hash'] = $newHash;
             } else {
-                // Solo actualizar nombre y email
                 $sql = 'UPDATE users 
                         SET name = :name,
                             email = :email,
@@ -176,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upd = $pdo->prepare($sql);
             $upd->execute($params);
 
-            // Actualizamos también la sesión
             $_SESSION['user_name'] = $username;
             $_SESSION['user_email'] = $email;
 
@@ -192,10 +165,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <title>Ajustes de la cuenta</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https:
+    <link rel="preconnect" href="https:
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https:
       rel="stylesheet"
     />
     <link rel="stylesheet" href="perfil.css" />

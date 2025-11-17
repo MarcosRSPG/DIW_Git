@@ -215,14 +215,10 @@ input[type="number"]:focus {
   color: #991b1b;
 }
 
-/* ============================
-   MEJORAS MODO OSCURO (settings)
-   ============================ */
 body.theme-dark #settingsForm {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
 }
 
-/* Título y secciones */
 body.theme-dark #titulo {
   color: #e5e7eb;
 }
@@ -236,7 +232,6 @@ body.theme-dark .section-title {
   border-top-color: rgba(31, 41, 55, 0.95);
 }
 
-/* Etiquetas y textos */
 body.theme-dark label {
   color: #e5e7eb;
 }
@@ -246,7 +241,6 @@ body.theme-dark .checkbox-group {
   color: #e5e7eb;
 }
 
-/* Selects y number inputs */
 body.theme-dark select,
 body.theme-dark input[type="number"] {
   background: #020617;
@@ -261,7 +255,6 @@ body.theme-dark input[type="number"]:focus {
   background: #020617;
 }
 
-/* Botón guardar */
 body.theme-dark #btnGuardar {
   background: linear-gradient(135deg, #22c55e, #15803d);
   box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
@@ -271,7 +264,6 @@ body.theme-dark #btnGuardar:hover {
   box-shadow: 0 16px 34px rgba(22, 163, 74, 0.8);
 }
 
-/* Enlace volver */
 body.theme-dark #volver {
   color: #9ca3af;
 }
@@ -280,7 +272,6 @@ body.theme-dark #volver a {
   color: #86efac;
 }
 
-/* Alertas en oscuro */
 body.theme-dark .alert-success {
   border-color: rgba(34, 197, 94, 0.9);
   background: rgba(22, 163, 74, 0.18);
