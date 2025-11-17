@@ -1,8 +1,42 @@
+<?php
+session_start();
+require_once __DIR__.'/php/config.php';
+header('Content-Type: text/html; charset=UTF-8');
+
+// theme viene de la configuración del usuario (tabla user_settings + sesión)
+$theme = $_SESSION['theme'] ?? 'system';
+
+// Si el usuario ha elegido "system", usamos lo que detectamos con JS
+if ($theme === 'system') {
+    $systemTheme = $_SESSION['system_theme'] ?? 'light'; // por defecto claro
+    $theme = $systemTheme; // ahora 'light' o 'dark'
+}
+
+if ($theme === 'dark') {
+    $bodyClass = 'theme-dark';
+} else {
+    // cualquier cosa que no sea dark -> light
+    $bodyClass = 'theme-light';
+}
+
+$bodyClass = $theme === 'dark' ? 'theme-dark' : 'theme-light';
+
+// Opcional: obligar a estar logueado para crear rutas
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// Cargar tags existentes desde la base de datos
+$stmt = $pdo->query('SELECT id, name, slug FROM tags ORDER BY name ASC');
+$tags = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <title>Crear nueva ruta</title>
+    <script defer src="./js/set-theme.js" type="module"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,8 +47,7 @@
     <script defer src="./js/newRuta.js" type="module"></script>
     <link rel="stylesheet" href="./styleNuevaRuta.css" />
   </head>
-  <body>
-    <!-- IMPORTANTE: enctype para poder subir archivos -->
+  <body class="<?php echo htmlspecialchars($bodyClass); ?>">
     <form
       id="routeForm"
       method="post"
@@ -32,6 +65,17 @@
           placeholder="Ej. Circular al Pico Norte"
           required
         />
+      </div>
+
+      <!-- NUEVA SECCIÓN: DESCRIPCIÓN DE LA RUTA -->
+      <div class="field">
+        <label for="description">Descripción de la ruta</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Cuenta brevemente cómo es la ruta, puntos clave, tipo de terreno, vistas, etc."
+          required
+        ></textarea>
       </div>
 
       <div class="two-cols">
@@ -109,10 +153,17 @@
               size="3"
               class="tags-select"
             >
-              <option value="bosque">Bosque</option>
-              <option value="montaña">Montaña</option>
-              <option value="costa">Costa</option>
-              <option value="rio">Río</option>
+              <?php if (!empty($tags)) { ?>
+                <?php foreach ($tags as $tag) { ?>
+                  <?php
+                    // Si no hubiera slug, generamos uno rápido a partir del nombre
+                    $slug = $tag['slug'] ?: strtolower(str_replace(' ', '_', $tag['name']));
+                    ?>
+                  <option value="<?php echo htmlspecialchars($slug); ?>">
+                    <?php echo htmlspecialchars($tag['name']); ?>
+                  </option>
+                <?php } ?>
+              <?php } ?>
             </select>
 
             <div class="new-tag-group">
@@ -127,7 +178,7 @@
         </div>
       </div>
 
-      <!-- NUEVA SECCIÓN: IMAGEN DE LA RUTA -->
+      <!-- SECCIÓN: IMAGEN DE LA RUTA -->
       <div class="field">
         <label for="route_image">Imagen de la ruta</label>
         <input
@@ -149,7 +200,7 @@
       <button type="submit" id="btnGuardarRuta">Guardar ruta</button>
 
       <p id="volver">
-        <a href="index.html">Volver al inicio</a>
+        <a href="index.php">Volver al inicio</a>
       </p>
     </form>
   </body>

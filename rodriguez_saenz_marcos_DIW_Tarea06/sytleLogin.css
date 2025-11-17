@@ -1,68 +1,154 @@
-html,
-body {
+:root {
+  --bg-image: url("./img/fondo.png");
+
+  --text-color: #222a24;
+  --text-muted: #6b7280;
+
+  --card-bg: #fdfbf7;
+  --card-border: rgba(148, 163, 184, 0.4);
+
+  --input-bg: #f9fafb;
+  --input-border: rgba(156, 163, 175, 0.85);
+
+  --accent: #7cb342;
+  --accent-strong: #558b2f;
+}
+
+/* Si el SO está en modo oscuro, cambiamos las variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-image: url("./img/fondoOscuro.png");
+
+    --text-color: #e5e7eb;
+    --text-muted: #9ca3af;
+
+    --card-bg: #020617;
+    --card-border: rgba(55, 65, 81, 0.9);
+
+    --input-bg: #020617;
+    --input-border: rgba(148, 163, 184, 0.9);
+
+    --accent: #22c55e;
+    --accent-strong: #15803d;
+  }
+}
+
+/* Base */
+
+html {
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
     Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  color: #222a24;
-  background-image: url("./img/fondo.png");
+}
+
+body {
+  color: var(--text-color);
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
   min-height: 100vh;
-}
 
-body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* ---------- FORMA Y DISTRIBUCIÓN DEL FORM ---------- */
+
 #formLogin {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-auto-rows: auto;
-  row-gap: 1.3rem;
-  column-gap: 1.75rem;
-
-  background: #fdfbf7;
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
   border-radius: 20px;
-  padding: 3rem 3.25rem;
-  width: min(540px, 95vw);
+  padding: 2.4rem 2.7rem;
+  width: min(420px, 94vw);
   box-shadow: 0 18px 40px rgba(148, 163, 184, 0.3);
-  color: #374151;
 
-  transform: scale(1.5);
-  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
+
+/* ---------- TÍTULO ---------- */
 
 #titulo {
-  grid-column: 1 / -1;
-  font-size: 2.1rem;
-  font-weight: 650;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
-  color: #1f2933;
+  color: var(--text-color);
   letter-spacing: 0.03em;
-  margin: 0 0 1rem;
+  margin: 0 0 0.9rem;
 }
+
+/* ---------- MENSAJE DE ERROR ---------- */
+
+.alert-error {
+  align-self: stretch;
+  margin: 0 0 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(248, 113, 113, 0.8);
+  background: rgba(254, 226, 226, 0.95);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 20px rgba(248, 113, 113, 0.25);
+  animation: fadeIn 0.18s ease-out;
+}
+
+.alert-error-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fef2f2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.alert-error-text {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #991b1b;
+}
+
+/* Ajuste del mensaje de error en modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .alert-error {
+    border-color: rgba(248, 113, 113, 0.9);
+    background: rgba(127, 29, 29, 0.9);
+    box-shadow: 0 8px 20px rgba(248, 113, 113, 0.5);
+  }
+
+  .alert-error-text {
+    color: #fee2e2;
+  }
+}
+
+/* ---------- LABELS E INPUTS ---------- */
 
 #lblUser,
 #lblPassword {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #4b5563;
-  align-self: center;
+  color: var(--text-color);
+  margin-top: 0.3rem;
 }
 
 #inputUser,
 #inputPassword {
   width: 100%;
-  padding: 0.8rem 0.9rem;
+  padding: 0.75rem 0.9rem;
   border-radius: 12px;
-  border: 1px solid rgba(156, 163, 175, 0.8);
-  background: #f9fafb;
-  color: #111827;
-  font-size: 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-color);
+  font-size: 0.98rem;
   outline: none;
   transition: border-color 0.18s ease, box-shadow 0.18s ease,
     background 0.18s ease, transform 0.08s ease;
@@ -75,23 +161,32 @@ body {
 
 #inputUser:focus,
 #inputPassword:focus {
-  border-color: #7cb342;
+  border-color: var(--accent);
   box-shadow: 0 0 0 2px rgba(124, 179, 66, 0.18);
   background: #fefce8;
   transform: translateY(-1px);
 }
 
+@media (prefers-color-scheme: dark) {
+  #inputUser:focus,
+  #inputPassword:focus {
+    background: #020617;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35);
+  }
+}
+
+/* ---------- BOTÓN ---------- */
+
 #submitEntrar {
-  grid-column: 1 / -1;
+  margin-top: 0.9rem;
   width: 100%;
-  padding: 0.9rem 1.2rem;
-  margin-top: 0.75rem;
+  padding: 0.85rem 1.2rem;
   border: none;
   border-radius: 999px;
   background: linear-gradient(135deg, #7cb342, #558b2f);
   color: #fdfbf7;
   font-weight: 650;
-  font-size: 1.05rem;
+  font-size: 1rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -113,20 +208,96 @@ body {
   filter: brightness(0.98);
 }
 
+@media (prefers-color-scheme: dark) {
+  #submitEntrar {
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
+  }
+
+  #submitEntrar:hover {
+    box-shadow: 0 16px 34px rgba(22, 163, 74, 0.8);
+  }
+}
+
+/* ---------- LINK REGISTRO ---------- */
+
 #registroLink {
-  grid-column: 1 / -1;
   text-align: center;
-  font-size: 0.95rem;
-  color: #6b7280;
-  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
 }
 
 #registroLink a {
-  color: #558b2f;
+  color: var(--accent-strong);
   text-decoration: none;
   font-weight: 500;
 }
 
 #registroLink a:hover {
   text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  #registroLink a {
+    color: #86efac;
+  }
+}
+
+/* Animación */
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-3px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* ================================
+   AJUSTES EXTRA PARA MODO OSCURO
+   (forzar texto más claro)
+   ================================ */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f9fafb;
+  }
+
+  #formLogin {
+    color: #f9fafb;
+  }
+
+  #titulo {
+    color: #f9fafb;
+  }
+
+  #lblUser,
+  #lblPassword {
+    color: #f9fafb;
+  }
+
+  #inputUser,
+  #inputPassword {
+    color: #f9fafb;
+  }
+
+  #inputUser::placeholder,
+  #inputPassword::placeholder {
+    color: #9ca3af;
+  }
+
+  #registroLink {
+    color: #e5e7eb;
+  }
+
+  #registroLink a {
+    color: #86efac;
+  }
+
+  /* Mensaje de error aún más legible */
+  .alert-error-text {
+    color: #fee2e2;
+  }
 }
