@@ -38,7 +38,6 @@ if (tagsSelect && newTagInput && addTagButton) {
   });
 }
 
-// Previsualización de imagen
 const imageInput = document.getElementById("route_image");
 const imagePreview = document.getElementById("image_preview");
 const imagePreviewWrapper = document.getElementById("image_preview_wrapper");

@@ -1,7 +1,7 @@
 <?php
 
-$host = '127.0.0.1';  // importante: que no sea 'localhost'
-$port = 4000;         // el que has mapeado en Docker
+$host = '127.0.0.1';
+$port = 4000;
 $db = 'mis_rutas';
 $user = 'root';
 $pass = 'rpwd';

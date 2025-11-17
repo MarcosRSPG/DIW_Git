@@ -1,6 +1,5 @@
 <?php
 
-// php/route_reaction.php
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 
@@ -14,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = (int) $_SESSION['user_id'];
 $routeId = isset($_POST['route_id']) ? (int) $_POST['route_id'] : 0;
-$action = $_POST['action'] ?? ''; // 'like' | 'dislike' | 'remove'
+$action = $_POST['action'] ?? '';
 
 if ($routeId <= 0 || !in_array($action, ['like', 'dislike', 'remove'], true)) {
     http_response_code(400);
@@ -22,7 +21,6 @@ if ($routeId <= 0 || !in_array($action, ['like', 'dislike', 'remove'], true)) {
     exit;
 }
 
-// Mirar reacción actual
 $stmt = $pdo->prepare('
     SELECT id, dis_li
     FROM li_dis_route
@@ -45,7 +43,6 @@ if ($action === 'remove') {
     $newStatus = 'none';
 } elseif ($action === 'like') {
     if ($current && (int) $current['dis_li'] === 1) {
-        // ya estaba en like -> quitar
         $del = $pdo->prepare('DELETE FROM li_dis_route WHERE id = :id');
         $del->execute([':id' => $current['id']]);
         $newStatus = 'none';
@@ -67,7 +64,6 @@ if ($action === 'remove') {
     }
 } elseif ($action === 'dislike') {
     if ($current && (int) $current['dis_li'] === 0) {
-        // ya estaba en dislike -> quitar
         $del = $pdo->prepare('DELETE FROM li_dis_route WHERE id = :id');
         $del->execute([':id' => $current['id']]);
         $newStatus = 'none';

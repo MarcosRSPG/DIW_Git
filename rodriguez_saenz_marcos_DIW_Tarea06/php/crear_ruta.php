@@ -1,15 +1,13 @@
 <?php
-// /php/crear_ruta.php
+
 session_start();
 require_once __DIR__.'/config.php';
 
-// Comprobar que el usuario ha iniciado sesión
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../login.php');
     exit;
 }
 
-// Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../nuevaRuta.html');
     exit;
@@ -17,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $errors = [];
 
-// ====== Recogida de datos ======
 $userId = (int) $_SESSION['user_id'];
 $title = trim($_POST['title'] ?? '');
 $description = trim($_POST['description'] ?? '');
@@ -29,9 +26,6 @@ $timeHours = trim($_POST['time_hours'] ?? '');
 $timeMinutes = trim($_POST['time_minutes'] ?? '');
 $tags = $_POST['tags'] ?? [];
 
-// De momento no hay campo de descripción en el formulario.
-
-// ====== Validaciones básicas ======
 if ($title === '') {
     $errors[] = 'El título de la ruta es obligatorio.';
 }
@@ -40,16 +34,13 @@ if ($userId <= 0) {
     $errors[] = 'Usuario no válido.';
 }
 
-// Normalizar duración
 $timeHours = ($timeHours === '') ? null : (int) $timeHours;
 $timeMinutes = ($timeMinutes === '') ? null : (int) $timeMinutes;
 
-// Normalizar fecha y dificultad
 $routeDate = ($date === '') ? null : $date;
 $difficultyValue = ($difficulty === '') ? null : $difficulty;
 
-// ====== Subida de imagen ======
-$photoPath = null; // ruta relativa que guardaremos en la BD
+$photoPath = null;
 
 if (!empty($_FILES['route_image']) && $_FILES['route_image']['error'] !== UPLOAD_ERR_NO_FILE) {
     $file = $_FILES['route_image'];
@@ -60,7 +51,6 @@ if (!empty($_FILES['route_image']) && $_FILES['route_image']['error'] !== UPLOAD
         $name = $file['name'];
         $size = $file['size'];
 
-        // límite de tamaño (5 MB)
         $maxSize = 5 * 1024 * 1024;
         if ($size > $maxSize) {
             $errors[] = 'La imagen es demasiado grande (máx. 5 MB).';
@@ -71,7 +61,6 @@ if (!empty($_FILES['route_image']) && $_FILES['route_image']['error'] !== UPLOAD
             if (!in_array($ext, $allowedExts, true)) {
                 $errors[] = 'Formato de imagen no permitido. Usa JPG, PNG, GIF o WEBP.';
             } else {
-                // Carpeta uploads en la raíz del proyecto
                 $uploadDir = dirname(__DIR__).'/uploads';
 
                 if (!is_dir($uploadDir)) {
@@ -84,7 +73,6 @@ if (!empty($_FILES['route_image']) && $_FILES['route_image']['error'] !== UPLOAD
                 if (!move_uploaded_file($tmpName, $destination)) {
                     $errors[] = 'No se pudo guardar la imagen en el servidor.';
                 } else {
-                    // Ruta relativa que usarás en <img src="...">
                     $photoPath = 'uploads/'.$newFileName;
                 }
             }
@@ -94,7 +82,6 @@ if (!empty($_FILES['route_image']) && $_FILES['route_image']['error'] !== UPLOAD
     }
 }
 
-// Si hay errores, los mostramos de forma sencilla
 if (!empty($errors)) {
     ?>
     <!DOCTYPE html>
@@ -117,11 +104,9 @@ if (!empty($errors)) {
     exit;
 }
 
-// ====== Guardar en la base de datos ======
 try {
     $pdo->beginTransaction();
 
-    // Insertar ruta
     $stmt = $pdo->prepare(
         'INSERT INTO routes 
          (user_id, title, description, route_date, start_location, end_location,
@@ -179,7 +164,6 @@ try {
     $stmt->execute();
     $routeId = (int) $pdo->lastInsertId();
 
-    // ====== Guardar tags ======
     if (is_array($tags) && !empty($tags)) {
         foreach ($tags as $tagSlug) {
             $tagSlug = trim($tagSlug);
@@ -187,7 +171,6 @@ try {
                 continue;
             }
 
-            // Buscar tag por slug o nombre
             $stmt = $pdo->prepare(
                 'SELECT id FROM tags 
                  WHERE slug = :slug OR name = :name
@@ -202,7 +185,6 @@ try {
             if ($tag) {
                 $tagId = (int) $tag['id'];
             } else {
-                // Nombre bonito a partir del slug: "rio_frio" -> "Rio Frio"
                 $prettyName = str_replace('_', ' ', $tagSlug);
                 $prettyName = mb_convert_case($prettyName, MB_CASE_TITLE, 'UTF-8');
 
@@ -218,7 +200,6 @@ try {
                 $tagId = (int) $pdo->lastInsertId();
             }
 
-            // Relación ruta-tag (ignora duplicados)
             $stmtLink = $pdo->prepare(
                 'INSERT IGNORE INTO route_tags (route_id, tag_id)
                  VALUES (:route_id, :tag_id)'
@@ -232,12 +213,11 @@ try {
 
     $pdo->commit();
 
-    // Redirigir a la página principal cuando todo va bien
     header('Location: ../index.php');
     exit;
 } catch (Exception $e) {
     $pdo->rollBack();
-    // En un proyecto real: loguear $e->getMessage()
+
     ?>
     <!DOCTYPE html>
     <html lang="es">

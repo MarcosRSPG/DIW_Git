@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* ======================= OVERLAY DE FILTROS ======================= */
   const btnFiltros = document.getElementById("btnFiltros");
   const overlay = document.getElementById("filtersOverlay");
   const cerrarBtn = document.getElementById("cerrarFiltros");
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ======================= UTIL: ESCAPE HTML ======================= */
   function escapeHtml(str) {
     return String(str).replace(/[&<>"']/g, (c) => {
       switch (c) {
@@ -40,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ======================= LIKE / DISLIKE (AJAX) ======================= */
   async function sendReaction(routeId, action, likeBtn, dislikeBtn) {
     if (!routeId) return;
 
@@ -88,8 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ======================= RUTAS: COMENTARIOS + REACCIONES ======================= */
-
   const routeCards = document.querySelectorAll(".route-card");
 
   routeCards.forEach((card) => {
@@ -128,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ======================= FORMULARIOS DE COMENTARIO (AJAX) ======================= */
   const commentForms = document.querySelectorAll("form.comment-form");
 
   commentForms.forEach((form) => {
