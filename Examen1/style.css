@@ -1,0 +1,183 @@
+html,
+body {
+  background-color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: xxx-large;
+}
+h3 {
+  font-size: xx-large;
+}
+h5 {
+  font-size: large;
+}
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #60f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2em;
+  width: 100%;
+  font-size: xx-large;
+  color: white;
+}
+
+#navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#navbar-links {
+  display: flex;
+}
+
+#navbar-link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  padding-left: 1em;
+  color: white;
+}
+#navbar-link:hover,
+#btnServicioa:hover {
+  cursor: pointer;
+}
+#navbar-right {
+  margin-right: 5%;
+
+  display: flex;
+  align-items: center;
+}
+#entrada {
+  margin-top: 20%;
+  margin-bottom: 20%;
+  justify-self: center;
+  text-align: center;
+  color: white;
+}
+#entrada button {
+  height: 5rem;
+  width: 15em;
+  border-radius: 30%;
+  background-color: #60f;
+  -webkit-border-radius: 30%;
+  -moz-border-radius: 30%;
+  -ms-border-radius: 30%;
+  -o-border-radius: 30%;
+  color: white;
+  font-size: large;
+}
+#servicios {
+  padding: 10%;
+  text-align: center;
+  background-color: white;
+  margin: 1%;
+}
+#servicio {
+  display: inline-block;
+  margin: 8%;
+  width: 10em;
+  padding: 2%;
+  text-align: justify;
+  background-color: #6df;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+  transition-duration: 200ms;
+  border-radius: 10%;
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  -ms-border-radius: 10%;
+  -o-border-radius: 10%;
+}
+#servicio:hover {
+  transform: translate(0, -5px);
+  -webkit-transform: translate(0, -5px);
+  -moz-transform: translate(0, -5px);
+  -ms-transform: translate(0, -5px);
+  -o-transform: translate(0, -5px);
+}
+#tabla {
+  padding: 10%;
+  text-align: center;
+  background-color: white;
+  margin: 1%;
+  color: #60f;
+  justify-items: center;
+  table,
+  tbody th,
+  tbody td,
+  thead th,
+  thead td {
+    text-align: left;
+    border-collapse: collapse;
+    border: 1px groove black;
+    width: 50%;
+    padding: 10px;
+  }
+  thead {
+    color: white;
+    background-color: #60f;
+  }
+  td {
+    color: #444;
+  }
+  tbody tr:hover {
+    background-color: #6df;
+  }
+  tfoot {
+    th,
+    td {
+      font-weight: bold;
+      width: 40%;
+      padding: 10px;
+    }
+    background-color: #bdc3c7;
+  }
+}
+#datos {
+  padding: 10%;
+  text-align: center;
+  background-color: white;
+  margin: 1%;
+  h2 {
+    color: #60f;
+  }
+}
+#formulario {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  width: 25%;
+  text-align: left;
+  background-color: #6df;
+  padding: 2%;
+  #lblEdad,
+  #lblNombre,
+  #lblDNI,
+  #inputEdad,
+  #inputNombre,
+  #inputDNI,
+  #submitEnviar {
+    font-size: x-large;
+    margin: 3%;
+  }
+  #inputEdad {
+    width: 3em;
+  }
+  #submitEnviar {
+    background-color: #60f;
+    width: 50%;
+    height: 3em;
+    color: white;
+  }
+}
+footer {
+  padding: 2%;
+  color: white;
+  text-align: center;
+}

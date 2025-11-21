@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marcos Rodriguez</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="navbar">
+      <div id="navbar-left">
+        <span>Mi maravillosa Web</span>
+      </div>
+      <div id="navbar-right">
+        <nav id="navbar-links">
+          <a href="#" id="navbar-link">Inicio</a>
+          <a href="#servicios" id="navbar-link">Servicios</a>
+          <a href="#tabla" id="navbar-link">Datos</a>
+          <a href="#datos" id="navbar-link">Contacto</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section id="entrada">
+        <h1>Bienvenido a mi maravillosa web</h1>
+        <h6>¡¡¡¡SORPRESA!!!!</h6>
+        <button onclick="window.location.href='#servicios'" id="btnServicioa">
+          Ver Servicios
+        </button>
+      </section>
+      <section id="servicios">
+        <h3>Nuestros servicios</h3>
+        <div id="bloquesServicios">
+          <div id="servicio">
+            <h5>Servicio 1</h5>
+            <p>Diseño web limpio</p>
+          </div>
+          <div id="servicio">
+            <h5>Servicio 2</h5>
+            <p>Otro servicio mas</p>
+          </div>
+          <div id="servicio">
+            <h5>Servicio 3</h5>
+            <p>Ultimo servicio</p>
+          </div>
+        </div>
+      </section>
+      <section id="tabla">
+        <h2>Tabla de Ejemplo</h2>
+        <table id="tabla">
+          <thead>
+            <tr id="titulo">
+              <th>Producto</th>
+              <th>Precio Unitario</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="fila">
+              <td>Laptop Premium</td>
+              <td>$1200</td>
+              <td>15</td>
+              <td>$18000</td>
+            </tr>
+            <tr id="fila">
+              <td>Monitor 4k</td>
+              <td>$450</td>
+              <td>20</td>
+              <td>$9000</td>
+            </tr>
+            <tr id="fila">
+              <td>Teclado mecánico</td>
+              <td>$90</td>
+              <td>50</td>
+              <td>$4500</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr id="fila">
+              <td>Total General</td>
+              <td></td>
+              <td></td>
+              <td>$31500</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+      <section id="datos">
+        <h2>Datos</h2>
+        <form id="formulario">
+          <label id="lblEdad" for="inputEdad">Edad (Entre 18 y 65 años)</label>
+          <input
+            id="inputEdad"
+            type="number"
+            min="18"
+            max="65"
+            title="Solo se permiten numeros entre el 18 y el 65"
+            name="age"
+            required
+          />
+          <label id="lblNombre" for="inputNombre">Nombre</label>
+          <input
+            id="inputNombre"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+            type="text"
+            title="Solo se permiten letras y espacios"
+            name="name"
+            required
+          />
+          <label id="lblDNI" for="inputDNI">DNI</label>
+          <input
+            type="text"
+            id="inputDNI"
+            name="dni"
+            pattern="^\d{8}[A-Za-z]$"
+            title="Solo se permiten 8 numeros y una letra"
+            maxlength="9"
+            required
+            placeholder="12345678A"
+          />
+          <button
+            type="submit"
+            onclick="window.location.href='#submitEnviar'"
+            id="submitEnviar"
+            value="Enviar"
+          >
+            Enviar
+          </button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>2025 Marcos Rodriguez. Todos los derechos reservados</p>
+    </footer>
+  </body>
+</html>
