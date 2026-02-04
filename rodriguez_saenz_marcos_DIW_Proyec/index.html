@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bienvenido al mundo de Dungeons & Dragons - Aventuras épicas, personajes legendarios y historias sin fin."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdn.userway.org/widget.js"
+      data-account="HPZq0jKQE3"
+    ></script>
+
+    <title>D&D - Dungeons & Dragons</title>
+  </head>
+  <body>
+    <nav role="navigation" aria-label="Menú principal">
+      <ul>
+        <li><a href="#inicio" tabindex="0">Inicio</a></li>
+        <li><a href="#clases" tabindex="0">Clases</a></li>
+        <li><a href="#razas" tabindex="0">Razas</a></li>
+        <li><a href="#contacto" tabindex="0">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="inicio" class="hero">
+        <img
+          src="img/header.jpg"
+          alt="Un grupo de aventureros en una mazmorra oscura durante una batalla épica"
+          class="hero-image"
+        />
+        <h1>Bienvenido a D&D</h1>
+        <p>El juego de rol por excelencia donde tus historias cobran vida.</p>
+      </section>
+
+      <section id="clases" class="content-section">
+        <h2>Clases de Aventureros</h2>
+        <p>
+          Elige tu camino como guerrero, mago, pícaro o clérigo. Cada clase
+          ofrece habilidades únicas.
+        </p>
+
+        <div class="classes-container">
+          <article class="card">
+            <img
+              src="img/Guerrero.png"
+              alt="Guerrero con armadura y espada en posición de combate"
+              class="card-image"
+            />
+            <h3>Guerrero</h3>
+            <p>
+              Maestro del combate cuerpo a cuerpo. Resistencia y fuerza sin
+              igual.
+            </p>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/Mago.png"
+              alt="Mago lanzando un hechizo con staff mágico"
+              class="card-image"
+            />
+            <h3>Mago</h3>
+            <p>
+              Domina la magia arcana. Control del campo de batalla a distancia.
+            </p>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/Picaro.png"
+              alt="Pícaro con dos dagas en posición de combate"
+              class="card-image"
+            />
+            <h3>Pícaro</h3>
+            <p>Sigilo y agilidad. Golpes críticos devastadores.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="razas" class="content-section">
+        <h2>Razas Disponibles</h2>
+        <p>Cada raza aporta características especiales a tu personaje:</p>
+
+        <ul role="list">
+          <li>
+            <strong>Humano:</strong> Versátil y ambicioso, ganan habilidades
+            adicionales.
+          </li>
+          <li>
+            <strong>Elfo:</strong> Ágiles y longevos, conectados con la magia
+            natural.
+          </li>
+          <li>
+            <strong>Enano:</strong> Fuertes y resistentes, maestros de la
+            minería.
+          </li>
+          <li>
+            <strong>Mediano:</strong> Pequeños pero valientes, sigilosos y
+            afortunados.
+          </li>
+          <li>
+            <strong>Tiefling:</strong> Tocados por la magia infernal, únicos y
+            poderosos.
+          </li>
+          <li>
+            <strong>Dragonborn:</strong> Descendientes de dragones, con aliento
+            devastador.
+          </li>
+        </ul>
+      </section>
+
+      <aside class="sidebar" aria-label="Contenido complementario">
+        <img
+          src="img/Tesoro.png"
+          alt="Tesoro y monedas de oro en una cofre antiguo con una calavera al lado"
+          class="sidebar-image"
+        />
+        <p>
+          <em>Cada aventura te espera con tesoros, magia y gloria infinita.</em>
+        </p>
+      </aside>
+
+      <section
+        class="accessibility-statement"
+        role="complementary"
+        aria-label="Declaración de accesibilidad"
+      >
+        <h2>Declaración de Accesibilidad</h2>
+        <p>Nos comprometemos a hacer este sitio accesible para todos:</p>
+        <ul>
+          <li>Navegación completa con teclado</li>
+          <li>Texto alternativo descriptivo en todas las imágenes</li>
+          <li>Contraste de colores optimizado para legibilidad</li>
+          <li>Estructura semántica clara y jerárquica</li>
+          <li>Compatibilidad con lectores de pantalla</li>
+        </ul>
+        <p>
+          ¿Encontraste problemas de accesibilidad?
+          <a href="#contacto">Contáctanos</a>.
+        </p>
+      </section>
+
+      <section id="contacto" class="contact-section">
+        <h2>Contacto y Sugerencias</h2>
+        <p>
+          Tu opinión es importante. Si encuentras algún problema o tienes
+          sugerencias sobre accesibilidad:
+        </p>
+
+        <form aria-label="Formulario de contacto">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Enviar</button>
+        </form>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; 2026 D&D - Aventuras sin fin. Todos los derechos reservados.</p>
+      <p>Sitio diseñado con accesibilidad en primer lugar.</p>
+    </footer>
+  </body>
+</html>
