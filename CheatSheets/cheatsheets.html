@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apuntes HTML5 y CSS3 (resumen estructurado)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        color-scheme: dark light;
+        --bg: #020617;
+        --bg-alt: #0b1220;
+        --card: #020617;
+        --border: #1f2937;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.15);
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --code-bg: #020617;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, #0f172a 0, #020617 55%);
+        color: var(--text);
+        line-height: 1.6;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Layout */
+      nav {
+        width: 260px;
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+        border-right: 1px solid var(--border);
+        background: radial-gradient(
+          circle at top left,
+          #020617 0,
+          #020617 40%,
+          #020617 100%
+        );
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        max-height: 100vh;
+        overflow-y: auto;
+      }
+
+      main {
+        flex: 1;
+        padding: 1.5rem 1.5rem 3rem;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.3;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+      }
+
+      h2 {
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
+        margin-top: 2.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.25rem;
+      }
+
+      h3 {
+        font-size: 1.05rem;
+        margin-top: 1.6rem;
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        margin-top: 0.4rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .tagline {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* Nav */
+      .nav-title {
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        font-size: 1rem;
+      }
+
+      .nav-section {
+        margin-bottom: 1.4rem;
+      }
+
+      .nav-section span {
+        display: block;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+      }
+
+      .nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .nav-links li {
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-links a {
+        color: var(--text);
+        text-decoration: none;
+        padding: 0.16rem 0.4rem;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: background 0.12s ease, color 0.12s ease,
+          transform 0.08s ease;
+      }
+
+      .nav-links a::before {
+        content: "•";
+        font-size: 0.7rem;
+        opacity: 0.8;
+      }
+
+      .nav-links a:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+        transform: translateX(1px);
+      }
+
+      .nav-main-link {
+        font-weight: 600;
+      }
+
+      /* Cards / bloques */
+      .callout {
+        border-radius: 0.9rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        border: 1px solid var(--border);
+        background: radial-gradient(
+          circle at top left,
+          #020617 0,
+          #020617 60%,
+          #020617 100%
+        );
+        margin-bottom: 1.5rem;
+      }
+
+      .callout strong {
+        color: var(--accent);
+      }
+
+      /* Tablas */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--card);
+      }
+
+      thead {
+        background: rgba(15, 23, 42, 0.95);
+      }
+
+      th,
+      td {
+        padding: 0.45rem 0.6rem;
+        border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+        vertical-align: top;
+      }
+
+      th {
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:nth-child(even) {
+        background: rgba(15, 23, 42, 0.5);
+      }
+
+      /* Código */
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 0.85rem;
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.08rem 0.3rem;
+        border-radius: 0.35rem;
+        border: 1px solid rgba(31, 41, 55, 0.9);
+      }
+
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 0.88rem;
+        background: var(--code-bg);
+        padding: 0.75rem 0.9rem;
+        border-radius: 0.8rem;
+        border: 1px solid var(--border);
+        overflow-x: auto;
+        margin: 0.4rem 0 1rem;
+      }
+
+      pre code {
+        border: none;
+        background: transparent;
+        padding: 0;
+      }
+
+      ul {
+        margin-top: 0.2rem;
+        margin-bottom: 0.6rem;
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.15rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.1rem 0.55rem;
+        font-size: 0.75rem;
+        border-radius: 999px;
+        border: 1px solid var(--accent-soft);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.2rem;
+      }
+
+      footer {
+        margin-top: 3rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 880px) {
+        body {
+          flex-direction: column;
+        }
+
+        nav {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          position: static;
+          max-height: none;
+        }
+
+        main {
+          padding: 1.2rem 1rem 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-title">Apuntes HTML5 &amp; CSS3</div>
+
+      <div class="nav-section">
+        <span>HTML5</span>
+        <ul class="nav-links">
+          <li><a class="nav-main-link" href="#html5">Resumen HTML5</a></li>
+          <li><a href="#html-estructura">Estructura básica</a></li>
+          <li><a href="#html-semantica">Etiquetas semánticas</a></li>
+          <li><a href="#html-texto">Texto y enlaces</a></li>
+          <li><a href="#html-listas-tablas">Listas y tablas</a></li>
+          <li><a href="#html-multimedia">Multimedia</a></li>
+          <li><a href="#html-formularios">Formularios</a></li>
+          <li><a href="#html-meta">Metadatos / SEO</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <span>CSS3</span>
+        <ul class="nav-links">
+          <li><a class="nav-main-link" href="#css3">Resumen CSS3</a></li>
+          <li><a href="#css-selectores">Selectores</a></li>
+          <li><a href="#css-pseudo">Pseudo-clases y pseudo-elementos</a></li>
+          <li><a href="#css-color">Color y fondo</a></li>
+          <li><a href="#css-texto">Texto y fuentes</a></li>
+          <li><a href="#css-box">Box model y posición</a></li>
+          <li><a href="#css-flexbox">Flexbox</a></li>
+          <li><a href="#css-grid">CSS Grid</a></li>
+          <li>
+            <a href="#css-varios">Otros (transiciones, transformaciones)</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Apuntes HTML5 y CSS3</h1>
+        <p class="tagline">
+          Resumen estructurado basado en cheatsheets típicos de HTML5 y CSS3.
+        </p>
+        <div class="callout">
+          <strong>Cómo usar estos apuntes:</strong>
+          usa el índice lateral para saltar de sección en sección. Cada bloque
+          resume la información que normalmente aparece en una chuleta de
+          HTML5/CSS3: etiquetas, atributos, propiedades, valores y ejemplos de
+          uso.
+        </div>
+      </header>
+
+      <!-- ===========================
+         HTML5
+    ============================ -->
+      <section id="html5">
+        <h2>HTML5</h2>
+        <p>
+          HTML5 define la <strong>estructura</strong> de una página web usando
+          elementos semánticos, atributos y una jerarquía clara del documento.
+        </p>
+
+        <section id="html-estructura">
+          <h3>Estructura básica del documento</h3>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Título de la página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    Contenido...
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Descripción</th>
+                <th>Notas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                <td>Indica que el documento es HTML5.</td>
+                <td>Debe ir al inicio del archivo.</td>
+              </tr>
+              <tr>
+                <td><code>&lt;html&gt;</code></td>
+                <td>Elemento raíz del documento.</td>
+                <td>
+                  El atributo <code>lang</code> indica el idioma principal.
+                </td>
+              </tr>
+              <tr>
+                <td><code>&lt;head&gt;</code></td>
+                <td>Contiene metadatos, título, enlaces a CSS, etc.</td>
+                <td>No se muestra directamente en la página.</td>
+              </tr>
+              <tr>
+                <td><code>&lt;body&gt;</code></td>
+                <td>Contenido visible de la página.</td>
+                <td>Todo lo que el usuario ve va aquí.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="html-semantica">
+          <h3>Etiquetas semánticas de estructura</h3>
+          <div class="two-col">
+            <table>
+              <thead>
+                <tr>
+                  <th>Etiqueta</th>
+                  <th>Uso principal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>&lt;header&gt;</code></td>
+                  <td>Cabecera de la página o de una sección.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;nav&gt;</code></td>
+                  <td>Zona de navegación (menús, enlaces principales).</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;main&gt;</code></td>
+                  <td>Contenido principal y único del documento.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;section&gt;</code></td>
+                  <td>Sección genérica con contenido relacionado.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;article&gt;</code></td>
+                  <td>Contenido independiente (post, noticia, etc.).</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;aside&gt;</code></td>
+                  <td>Contenido tangencial (barras laterales, notas).</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;footer&gt;</code></td>
+                  <td>Pie de página o de una sección.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Etiqueta</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>&lt;div&gt;</code></td>
+                  <td>Contenedor genérico sin significado semántico.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;span&gt;</code></td>
+                  <td>
+                    Contenedor en línea genérico, para pequeños fragmentos.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>&lt;time&gt;</code></td>
+                  <td>Representa una fecha u hora (legible para máquinas).</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;figure&gt;</code></td>
+                  <td>
+                    Ilustración, foto, código, etc. con
+                    <code>&lt;figcaption&gt;</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>&lt;figcaption&gt;</code></td>
+                  <td>Título o descripción de <code>&lt;figure&gt;</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="html-texto">
+          <h3>Texto, enlaces e imágenes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Ejemplo</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Títulos</td>
+                <td>
+                  <code>&lt;h1&gt;...&lt;/h1&gt;</code> hasta
+                  <code>&lt;h6&gt;</code>
+                </td>
+                <td>Estructuran el contenido jerárquicamente.</td>
+              </tr>
+              <tr>
+                <td>Párrafos</td>
+                <td><code>&lt;p&gt;Texto...&lt;/p&gt;</code></td>
+                <td>Bloques de texto.</td>
+              </tr>
+              <tr>
+                <td>Enlaces</td>
+                <td>
+                  <code>&lt;a href="https://..."&gt;Texto&lt;/a&gt;</code>
+                </td>
+                <td>Enlaces a otras páginas o secciones.</td>
+              </tr>
+              <tr>
+                <td>Imágenes</td>
+                <td>
+                  <code>&lt;img src="img.png" alt="Descripción"&gt;</code>
+                </td>
+                <td>
+                  Mostrar imágenes. El atributo <code>alt</code> es obligatorio.
+                </td>
+              </tr>
+              <tr>
+                <td>Énfasis</td>
+                <td>
+                  <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>,
+                  <code>&lt;mark&gt;</code>
+                </td>
+                <td>Marcan importancia, énfasis o resaltado.</td>
+              </tr>
+              <tr>
+                <td>Código</td>
+                <td><code>&lt;code&gt;let x = 1;&lt;/code&gt;</code></td>
+                <td>Fragmentos de código en línea.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="html-listas-tablas">
+          <h3>Listas y tablas</h3>
+          <div class="two-col">
+            <div>
+              <span class="badge">Listas</span>
+              <ul>
+                <li><code>&lt;ul&gt;</code>: lista no ordenada (viñetas).</li>
+                <li><code>&lt;ol&gt;</code>: lista ordenada (números).</li>
+                <li><code>&lt;li&gt;</code>: elemento de lista.</li>
+              </ul>
+              <pre><code>&lt;ul&gt;
+  &lt;li&gt;Elemento 1&lt;/li&gt;
+  &lt;li&gt;Elemento 2&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+            </div>
+            <div>
+              <span class="badge">Tablas</span>
+              <ul>
+                <li>
+                  <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>,
+                  <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>
+                </li>
+                <li>
+                  <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>,
+                  <code>&lt;tfoot&gt;</code> para secciones.
+                </li>
+              </ul>
+              <pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Edad&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Ana&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="html-multimedia">
+          <h3>Multimedia (audio y vídeo)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Ejemplo</th>
+                <th>Atributos clave</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;audio&gt;</code></td>
+                <td>
+                  <code
+                    >&lt;audio controls src="audio.mp3"&gt;&lt;/audio&gt;</code
+                  >
+                </td>
+                <td>
+                  <code>controls</code>, <code>autoplay</code>,
+                  <code>loop</code>, <code>muted</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>&lt;video&gt;</code></td>
+                <td>
+                  <code
+                    >&lt;video controls width="640"
+                    src="video.mp4"&gt;&lt;/video&gt;</code
+                  >
+                </td>
+                <td>
+                  <code>controls</code>, <code>poster</code>,
+                  <code>width/height</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>&lt;source&gt;</code></td>
+                <td>
+                  Formatos alternativos dentro de
+                  <code>&lt;audio&gt;</code>/<code>&lt;video&gt;</code>.
+                </td>
+                <td><code>src</code>, <code>type</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="html-formularios">
+          <h3>Formularios HTML5</h3>
+          <p>
+            HTML5 introduce nuevos tipos de campos y atributos para validación.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento / atributo</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;form&gt;</code></td>
+                <td>Contenedor del formulario.</td>
+                <td>
+                  <code>&lt;form action="/enviar" method="post"&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>&lt;input type="email"&gt;</code></td>
+                <td>Campo de email con validación básica.</td>
+                <td><code>&lt;input type="email" required&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>&lt;input type="number"&gt;</code></td>
+                <td>
+                  Números con <code>min</code>, <code>max</code>,
+                  <code>step</code>.
+                </td>
+                <td>
+                  <code>&lt;input type="number" min="0" max="10"&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>&lt;input type="date"&gt;</code></td>
+                <td>Selector de fecha.</td>
+                <td><code>&lt;input type="date"&gt;</code></td>
+              </tr>
+              <tr>
+                <td>
+                  <code>required</code>, <code>pattern</code>,
+                  <code>placeholder</code>
+                </td>
+                <td>Atributos de validación y ayuda visual.</td>
+                <td>
+                  <code
+                    >&lt;input required pattern="\\d{5}"
+                    placeholder="C.P."&gt;</code
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="html-meta">
+          <h3>Metadatos básicos (head / SEO)</h3>
+          <pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Título descriptivo&lt;/title&gt;
+  &lt;meta name="description" content="Descripción de la página"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+</code></pre>
+        </section>
+      </section>
+
+      <!-- ===========================
+         CSS3
+    ============================ -->
+      <section id="css3">
+        <h2>CSS3</h2>
+        <p>
+          CSS3 se utiliza para definir la <strong>presentación</strong> de los
+          documentos HTML: colores, tipografías, distribuciones de cajas,
+          animaciones, etc.
+        </p>
+
+        <section id="css-selectores">
+          <h3>Selectores básicos</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Selector</th>
+                <th>Ejemplo</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Elemento</td>
+                <td><code>p &#123; ... &#125;</code></td>
+                <td>Selecciona todas las etiquetas <code>&lt;p&gt;</code>.</td>
+              </tr>
+              <tr>
+                <td>Clase</td>
+                <td><code>.boton &#123; ... &#125;</code></td>
+                <td>Elementos con <code>class="boton"</code>.</td>
+              </tr>
+              <tr>
+                <td>ID</td>
+                <td><code>#principal &#123; ... &#125;</code></td>
+                <td>Elemento con <code>id="principal"</code>.</td>
+              </tr>
+              <tr>
+                <td>Descendiente</td>
+                <td><code>nav a &#123; ... &#125;</code></td>
+                <td>
+                  <code>&lt;a&gt;</code> dentro de <code>&lt;nav&gt;</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>Hijo directo</td>
+                <td><code>ul &gt; li &#123; ... &#125;</code></td>
+                <td>Solo hijos directos.</td>
+              </tr>
+              <tr>
+                <td>Atributo</td>
+                <td><code>input[type="email"]</code></td>
+                <td>Elementos con atributo/valor concreto.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="css-pseudo">
+          <h3>Pseudo-clases y pseudo-elementos</h3>
+          <div class="two-col">
+            <div>
+              <span class="badge">Pseudo-clases (estado)</span>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Selector</th>
+                    <th>Uso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>a:link</code></td>
+                    <td>Enlace no visitado.</td>
+                  </tr>
+                  <tr>
+                    <td><code>a:visited</code></td>
+                    <td>Enlace visitado.</td>
+                  </tr>
+                  <tr>
+                    <td><code>a:hover</code></td>
+                    <td>Cuando el ratón pasa por encima.</td>
+                  </tr>
+                  <tr>
+                    <td><code>a:active</code></td>
+                    <td>Durante el clic.</td>
+                  </tr>
+                  <tr>
+                    <td><code>input:focus</code></td>
+                    <td>Campo que tiene el foco.</td>
+                  </tr>
+                  <tr>
+                    <td><code>input:disabled</code>, <code>:enabled</code></td>
+                    <td>Campos desactivados/activados.</td>
+                  </tr>
+                  <tr>
+                    <td><code>input:checked</code></td>
+                    <td>Checkbox o radio seleccionado.</td>
+                  </tr>
+                  <tr>
+                    <td><code>:first-child</code>, <code>:last-child</code></td>
+                    <td>Primer/último hijo de un contenedor.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <span class="badge">Pseudo-elementos (partes)</span>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Selector</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>p::first-line</code></td>
+                    <td>Primera línea del párrafo.</td>
+                  </tr>
+                  <tr>
+                    <td><code>p::first-letter</code></td>
+                    <td>Primera letra (capital inicial).</td>
+                  </tr>
+                  <tr>
+                    <td><code>::before</code>, <code>::after</code></td>
+                    <td>Contenido generado antes/después del elemento.</td>
+                  </tr>
+                  <tr>
+                    <td><code>::selection</code></td>
+                    <td>Parte del texto seleccionada por el usuario.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="css-color">
+          <h3>Colores, fondos y bordes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Ejemplo</th>
+                <th>Significado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>color</code></td>
+                <td><code>color: #38bdf8;</code></td>
+                <td>Color del texto.</td>
+              </tr>
+              <tr>
+                <td><code>background-color</code></td>
+                <td><code>background-color: #0f172a;</code></td>
+                <td>Color de fondo.</td>
+              </tr>
+              <tr>
+                <td><code>background-image</code></td>
+                <td><code>background-image: url("fondo.png");</code></td>
+                <td>Imagen de fondo.</td>
+              </tr>
+              <tr>
+                <td><code>border</code></td>
+                <td><code>border: 1px solid #1f2937;</code></td>
+                <td>Borde completo (anchura, estilo, color).</td>
+              </tr>
+              <tr>
+                <td><code>border-radius</code></td>
+                <td><code>border-radius: 0.75rem;</code></td>
+                <td>Esquinas redondeadas.</td>
+              </tr>
+              <tr>
+                <td><code>box-shadow</code></td>
+                <td><code>box-shadow: 0 10px 30px rgba(0,0,0,.4);</code></td>
+                <td>Sombra de la caja.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="css-texto">
+          <h3>Texto y tipografías</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Ejemplo</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>font-family</code></td>
+                <td><code>font-family: "Segoe UI", sans-serif;</code></td>
+                <td>Define la fuente.</td>
+              </tr>
+              <tr>
+                <td><code>font-size</code></td>
+                <td><code>font-size: 16px;</code> / <code>1rem</code></td>
+                <td>Tamaño de letra.</td>
+              </tr>
+              <tr>
+                <td><code>font-weight</code></td>
+                <td><code>font-weight: 400;</code> / <code>bold</code></td>
+                <td>Grosor de la fuente.</td>
+              </tr>
+              <tr>
+                <td><code>line-height</code></td>
+                <td><code>line-height: 1.5;</code></td>
+                <td>Altura de línea.</td>
+              </tr>
+              <tr>
+                <td><code>text-align</code></td>
+                <td><code>text-align: center;</code></td>
+                <td>Alineación del texto.</td>
+              </tr>
+              <tr>
+                <td><code>text-decoration</code></td>
+                <td><code>text-decoration: none;</code></td>
+                <td>Subrayado, tachado, etc.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="css-box">
+          <h3>Box model, margen, padding y posicionamiento</h3>
+          <div class="two-col">
+            <div>
+              <span class="badge">Box model</span>
+              <ul>
+                <li><code>width</code> / <code>height</code>: ancho y alto.</li>
+                <li><code>margin</code>: espacio externo.</li>
+                <li><code>padding</code>: espacio interno.</li>
+                <li><code>border</code>: borde de la caja.</li>
+                <li>
+                  <code>box-sizing: border-box;</code> incluye el borde y
+                  padding en el ancho total.
+                </li>
+              </ul>
+              <pre><code>.caja &#123;
+  width: 300px;
+  padding: 1rem;
+  margin: 1rem auto;
+  border: 1px solid #1f2937;
+  box-sizing: border-box;
+&#125;
+</code></pre>
+            </div>
+            <div>
+              <span class="badge">Posicionamiento</span>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Valor</th>
+                    <th>Comportamiento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>static</code></td>
+                    <td>Posición por defecto.</td>
+                  </tr>
+                  <tr>
+                    <td><code>relative</code></td>
+                    <td>Desplazado respecto a su posición normal.</td>
+                  </tr>
+                  <tr>
+                    <td><code>absolute</code></td>
+                    <td>Relativo al contenedor posicionado más cercano.</td>
+                  </tr>
+                  <tr>
+                    <td><code>fixed</code></td>
+                    <td>Fijo respecto a la ventana (viewport).</td>
+                  </tr>
+                  <tr>
+                    <td><code>sticky</code></td>
+                    <td>
+                      Se comporta como relativo y se “pega” al hacer scroll.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="css-flexbox">
+          <h3>Flexbox</h3>
+          <p>
+            Flexbox sirve para organizar elementos en fila o columna de forma
+            flexible.
+          </p>
+          <pre><code>.contenedor &#123;
+  display: flex;
+  flex-direction: row;      /* row | row-reverse | column | column-reverse */
+  flex-wrap: nowrap;        /* nowrap | wrap | wrap-reverse */
+  justify-content: center;  /* eje principal */
+  align-items: center;      /* eje secundario */
+&#125;
+
+.item &#123;
+  flex: 1 1 auto;           /* grow shrink basis */
+  order: 0;                 /* orden visual */
+&#125;
+</code></pre>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>En contenedor</th>
+                <th>En ítems</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>display</code></td>
+                <td><code>display: flex;</code></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><code>flex-direction</code></td>
+                <td><code>row</code>, <code>column</code>, etc.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><code>justify-content</code></td>
+                <td>Alinea en el eje principal.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><code>align-items</code></td>
+                <td>Alinea en el eje cruzado.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><code>flex</code></td>
+                <td>—</td>
+                <td><code>flex: grow shrink basis;</code></td>
+              </tr>
+              <tr>
+                <td><code>order</code></td>
+                <td>—</td>
+                <td>Cambia el orden visual de los ítems.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="css-grid">
+          <h3>CSS Grid (introducción rápida)</h3>
+          <pre><code>.grid &#123;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 1rem;
+&#125;
+
+.item-a &#123;
+  grid-column: 1 / span 2;
+&#125;
+</code></pre>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>display: grid;</code></td>
+                <td>Activa un contenedor de rejilla bidimensional.</td>
+              </tr>
+              <tr>
+                <td><code>grid-template-columns</code></td>
+                <td>Define las columnas (número y tamaño).</td>
+              </tr>
+              <tr>
+                <td><code>grid-template-rows</code></td>
+                <td>Define las filas.</td>
+              </tr>
+              <tr>
+                <td><code>gap</code></td>
+                <td>Espacio entre filas y columnas.</td>
+              </tr>
+              <tr>
+                <td><code>grid-column</code>, <code>grid-row</code></td>
+                <td>Posición de cada ítem en la rejilla.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="css-varios">
+          <h3>Transiciones, transformaciones y opacidad</h3>
+          <div class="two-col">
+            <div>
+              <span class="badge">Transiciones</span>
+              <pre><code>.boton &#123;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+&#125;
+
+.boton:hover &#123;
+  background-color: #38bdf8;
+  transform: translateY(-1px); 
+&#125;
+</code></pre>
+            </div>
+            <div>
+              <span class="badge">Transformaciones / opacidad</span>
+              <ul>
+                <li><code>transform: translateX(10px);</code></li>
+                <li><code>transform: scale(1.1);</code></li>
+                <li><code>transform: rotate(5deg);</code></li>
+                <li>
+                  <code>opacity: 0.5;</code> (0 = transparente, 1 = opaco)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer>
+        Estos apuntes resumen y organizan la información típica de chuletas de
+        HTML5 y CSS3, reestructurada en secciones prácticas para consulta
+        rápida.
+      </footer>
+    </main>
+  </body>
+</html>

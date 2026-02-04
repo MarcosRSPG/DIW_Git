@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo básico de componentes (HTML + CSS)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      /* 
+    =========================================================
+    ESTILOS GENERALES (puedes copiarlos enteros como "base")
+    =========================================================
+    */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #0f172a; /* Fondo general oscuro */
+        color: #e5e7eb; /* Texto principal */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Contenedor principal de la página:
+       Navbar arriba + contenido en 2 columnas (sidebar + main) */
+      .app {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        min-height: 100vh;
+      }
+
+      .app-body {
+        display: grid;
+        grid-template-columns: 220px 1fr; /* Sidebar + contenido principal */
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      /* Versión responsive: en pantallas pequeñas,
+       el sidebar pasa debajo del contenido */
+      @media (max-width: 800px) {
+        .app-body {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          order: 2;
+        }
+      }
+
+      /* Pequeña tarjeta reutilizable */
+      .card {
+        background: #111827;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+        padding: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        margin-bottom: 1rem;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .card-text {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+
+      /* 
+    ===========================
+    NAVBAR (barra de navegación)
+    ===========================
+    Copia este bloque + el HTML de la sección NAVBAR
+    si en el examen necesitas una barra superior.
+    */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #1f2937;
+        background: #020617; /* Fijo arriba */
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .navbar-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .navbar-logo {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #3b82f6, #6366f1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .navbar-links {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .navbar-link {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        color: #9ca3af;
+        border: 1px solid transparent;
+      }
+
+      .navbar-link:hover {
+        background: #020617;
+        border-color: #1f2937;
+        color: #e5e7eb;
+      }
+
+      .navbar-link--active {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.6);
+        color: #bfdbfe;
+      }
+
+      .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: #9ca3af;
+      }
+
+      /* 
+    ==========================
+    SIDEBAR (barra lateral)
+    ==========================
+    Copia este bloque + el HTML de la sección SIDEBAR
+    si necesitas un menú lateral.
+    */
+      .sidebar {
+        background: #020617;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .sidebar-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #9ca3af;
+        margin-bottom: 0.25rem;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .sidebar-item {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+        border-radius: 8px;
+        color: #9ca3af;
+        cursor: pointer;
+      }
+
+      .sidebar-item:hover {
+        background: #111827;
+        color: #e5e7eb;
+      }
+
+      .sidebar-item--active {
+        background: rgba(59, 130, 246, 0.15);
+        color: #bfdbfe;
+        border: 1px solid rgba(59, 130, 246, 0.6);
+      }
+
+      .sidebar-footer {
+        margin-top: auto;
+        font-size: 0.75rem;
+        color: #9ca3af;
+        border-top: 1px solid #1f2937;
+        padding-top: 0.5rem;
+      }
+
+      /* 
+    =======================
+    BREADCRUMB (migas de pan)
+    =======================
+    Es un mini-menú para mostrar la ruta actual.
+    */
+      .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: #9ca3af;
+        margin-bottom: 0.75rem;
+      }
+
+      .breadcrumb a {
+        color: #9ca3af;
+      }
+
+      .breadcrumb a:hover {
+        color: #e5e7eb;
+        text-decoration: underline;
+      }
+
+      .breadcrumb-separator {
+        opacity: 0.6;
+      }
+
+      .breadcrumb-current {
+        color: #e5e7eb;
+        font-weight: 500;
+      }
+
+      /* 
+    ======================================
+    MODAL (ventana emergente) SOLO CON CSS
+    ======================================
+    Uso de :target (al hacer click en un enlace <a href="#id">)
+    - Copia este bloque + el HTML de MODAL.
+    */
+
+      /* Fondo oscuro y centrado del modal (oculto por defecto) */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 50;
+      }
+
+      /* Cuando el id del overlay coincide con el hash de la URL (#modal-ejemplo)
+       se aplica :target y mostramos el modal */
+      .modal-overlay:target {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Caja del modal */
+      .modal {
+        background: #020617;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+        max-width: 400px;
+        width: 90%;
+        padding: 1rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .modal-close {
+        font-size: 1.1rem;
+        text-decoration: none;
+        color: #9ca3af;
+        padding: 0 0.25rem;
+      }
+
+      .modal-close:hover {
+        color: #e5e7eb;
+      }
+
+      .modal-body {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+      }
+
+      .modal-footer {
+        text-align: right;
+        font-size: 0.85rem;
+      }
+
+      .btn {
+        display: inline-block;
+        font-size: 0.85rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.9rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #2563eb, #6366f1);
+        color: #e5e7eb;
+        border-color: transparent;
+      }
+
+      .btn-primary:hover {
+        filter: brightness(1.05);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #e5e7eb;
+        border-color: #4b5563;
+      }
+
+      .btn-outline:hover {
+        background: #111827;
+      }
+
+      /* 
+    ==========================
+    PAGINACIÓN (números de página)
+    ==========================
+    Copia este bloque + el HTML de PAGINACIÓN.
+    */
+
+      .pagination {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        border-radius: 999px;
+        background: #020617;
+        border: 1px solid #1f2937;
+        font-size: 0.85rem;
+      }
+
+      .pagination-button,
+      .pagination-page {
+        min-width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.6rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+        color: #9ca3af;
+        background: transparent;
+      }
+
+      .pagination-button:hover,
+      .pagination-page:hover {
+        background: #111827;
+        color: #e5e7eb;
+        border-color: #1f2937;
+      }
+
+      .pagination-page--active {
+        background: rgba(59, 130, 246, 0.2);
+        color: #bfdbfe;
+        border-color: rgba(59, 130, 246, 0.6);
+        font-weight: 500;
+      }
+
+      .pagination-ellipsis {
+        padding: 0 0.25rem;
+        color: #6b7280;
+      }
+
+      /* 
+    ======================================
+    DROPDOWN MENÚ (con <details> y <summary>)
+    ======================================
+    No necesita JS, el propio navegador abre/cierra el menú.
+    Copia este bloque + el HTML de DROPDOWN.
+    */
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        font-size: 0.85rem;
+      }
+
+      .dropdown summary {
+        list-style: none; /* Quitamos la flecha por defecto (depende del navegador) */
+        border-radius: 999px;
+        border: 1px solid #1f2937;
+        padding: 0.35rem 0.8rem;
+        cursor: pointer;
+        background: #020617;
+        color: #e5e7eb;
+      }
+
+      /* Hack para eliminar icono por defecto de summary en algunos navegadores */
+      .dropdown summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .dropdown summary::after {
+        content: "▾";
+        margin-left: 0.4rem;
+        font-size: 0.7rem;
+        color: #9ca3af;
+      }
+
+      .dropdown[open] summary {
+        background: #111827;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        margin-top: 0.4rem;
+        right: 0;
+        min-width: 160px;
+        background: #020617;
+        border-radius: 10px;
+        border: 1px solid #1f2937;
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.5);
+        padding: 0.3rem;
+        z-index: 15;
+      }
+
+      .dropdown-item {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.5rem;
+        border-radius: 8px;
+        color: #9ca3af;
+        cursor: pointer;
+      }
+
+      .dropdown-item:hover {
+        background: #111827;
+        color: #e5e7eb;
+      }
+
+      /* 
+    =======================
+    TABS (pestañas con CSS)
+    =======================
+    Usamos <input type="radio"> ocultos + labels como pestañas.
+    Copia este bloque + el HTML de TABS.
+    */
+      .tabs {
+        font-size: 0.85rem;
+      }
+
+      .tabs-header {
+        display: inline-flex;
+        gap: 0.25rem;
+        background: #020617;
+        border-radius: 999px;
+        padding: 0.25rem;
+        border: 1px solid #1f2937;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Ocultamos los radios, solo usamos las etiquetas <label> como pestañas */
+      .tabs input[type="radio"] {
+        display: none;
+      }
+
+      .tabs-label {
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        cursor: pointer;
+        color: #9ca3af;
+      }
+
+      .tabs-label:hover {
+        background: #111827;
+        color: #e5e7eb;
+      }
+
+      /* Estado "activa": cuando el radio está checked, 
+       coloreamos su label correspondiente */
+      #tab1:checked ~ .tabs-header label[for="tab1"],
+      #tab2:checked ~ .tabs-header label[for="tab2"],
+      #tab3:checked ~ .tabs-header label[for="tab3"] {
+        background: rgba(59, 130, 246, 0.2);
+        color: #bfdbfe;
+        border: 1px solid rgba(59, 130, 246, 0.6);
+      }
+
+      .tabs-content {
+        border-radius: 8px;
+        background: #020617;
+        border: 1px solid #1f2937;
+        padding: 0.6rem 0.7rem;
+        color: #9ca3af;
+      }
+
+      /* Por defecto ocultamos todos los contenidos de pestañas */
+      .tab-panel {
+        display: none;
+      }
+
+      /* Mostramos solo el panel asociado al radio seleccionado */
+      #tab1:checked ~ .tabs-content #tab1-content,
+      #tab2:checked ~ .tabs-content #tab2-content,
+      #tab3:checked ~ .tabs-content #tab3-content {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- 
+    ==========================
+    NAVBAR (BARRA SUPERIOR)
+    ==========================
+    Copia solo este <header> si necesitas un navbar.
+    -->
+      <header class="navbar">
+        <div class="navbar-left">
+          <div class="navbar-logo">UI</div>
+          <nav class="navbar-links">
+            <a href="#" class="navbar-link navbar-link--active">Inicio</a>
+            <a href="#" class="navbar-link">Componentes</a>
+            <a href="#" class="navbar-link">Ayuda</a>
+          </nav>
+        </div>
+        <div class="navbar-right">
+          <span>Usuario: Marcos</span>
+        </div>
+      </header>
+
+      <div class="app-body">
+        <!-- 
+      ==========================
+      SIDEBAR (BARRA LATERAL)
+      ==========================
+      Copia este <aside> si necesitas un menú lateral.
+      -->
+        <aside class="sidebar">
+          <div>
+            <div class="sidebar-title">Secciones</div>
+            <nav class="sidebar-nav">
+              <button class="sidebar-item sidebar-item--active" type="button">
+                Resumen
+              </button>
+              <button class="sidebar-item" type="button">Usuarios</button>
+              <button class="sidebar-item" type="button">Ajustes</button>
+            </nav>
+          </div>
+
+          <div class="sidebar-footer">
+            Atajo: <strong>Ctrl + F</strong> para buscar
+          </div>
+        </aside>
+
+        <!-- 
+      =======================
+      CONTENIDO PRINCIPAL
+      =======================
+      Aquí metemos los menús y el modal.
+      -->
+        <main>
+          <!-- BREADCRUMB (3er menú: migas de pan) -->
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="#">Inicio</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="#">Componentes</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Ejemplo básico</span>
+          </nav>
+
+          <!-- Tarjeta de presentación -->
+          <section class="card">
+            <h1 class="card-title">Colección de componentes básicos</h1>
+            <p class="card-text">
+              Este ejemplo incluye: navbar, sidebar, modal, paginación y tres
+              tipos de menús (dropdown, pestañas y breadcrumb). Todo está hecho
+              solo con HTML + CSS y muy comentado para poder copiar y pegar
+              fácilmente en un examen.
+            </p>
+          </section>
+
+          <!-- 
+        ===================================
+        MODAL (ventana emergente con :target)
+        ===================================
+        Para abrir el modal, usamos un enlace <a href="#modal-ejemplo">.
+        Para cerrarlo, enlazamos a # o a otra parte de la página.
+        -->
+          <section class="card">
+            <h2 class="card-title">Modal básico (sin JavaScript)</h2>
+            <p class="card-text" style="margin-bottom: 0.75rem">
+              El botón de abajo abre un modal centrado usando solo CSS
+              (<code>:target</code>).
+            </p>
+
+            <!-- Enlace que abre el modal -->
+            <a href="#modal-ejemplo" class="btn btn-primary"> Abrir modal </a>
+          </section>
+
+          <!-- 
+        =====================
+        DROPDOWN (2º menú)
+        =====================
+        Hecho con <details> y <summary>, ideal para listas de acciones.
+        -->
+          <section class="card">
+            <h2 class="card-title">Menú desplegable (dropdown)</h2>
+            <p class="card-text" style="margin-bottom: 0.75rem">
+              Este menú se abre y se cierra solo con HTML usando
+              <code>&lt;details&gt;</code>.
+            </p>
+
+            <!-- Dropdown: copia este <details> completo si lo necesitas -->
+            <details class="dropdown">
+              <summary>Acciones</summary>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" type="button">Crear nuevo</button>
+                <button class="dropdown-item" type="button">Duplicar</button>
+                <button class="dropdown-item" type="button">Exportar</button>
+              </div>
+            </details>
+          </section>
+
+          <!-- 
+        =====================
+        TABS (pestañas, 3er menú)
+        =====================
+        Menú de pestañas hecho con radio buttons ocultos.
+        -->
+          <section class="card">
+            <h2 class="card-title">Menú de pestañas (tabs)</h2>
+            <p class="card-text" style="margin-bottom: 0.75rem">
+              Cada pestaña muestra un contenido distinto. No hay JavaScript,
+              solo CSS.
+            </p>
+
+            <!-- Bloque completo de TABS -->
+            <div class="tabs">
+              <!-- Radios ocultos (uno por pestaña) -->
+              <input type="radio" name="grupo-tabs" id="tab1" checked />
+              <input type="radio" name="grupo-tabs" id="tab2" />
+              <input type="radio" name="grupo-tabs" id="tab3" />
+
+              <!-- Encabezado de pestañas (labels) -->
+              <div class="tabs-header">
+                <label class="tabs-label" for="tab1">General</label>
+                <label class="tabs-label" for="tab2">Diseño</label>
+                <label class="tabs-label" for="tab3">Código</label>
+              </div>
+
+              <!-- Contenido de pestañas -->
+              <div class="tabs-content">
+                <div class="tab-panel" id="tab1-content">
+                  Pestaña <strong>General</strong>: aquí irían los ajustes
+                  principales.
+                </div>
+                <div class="tab-panel" id="tab2-content">
+                  Pestaña <strong>Diseño</strong>: ideal para colores, tamaños y
+                  fuentes.
+                </div>
+                <div class="tab-panel" id="tab3-content">
+                  Pestaña <strong>Código</strong>: útil para ejemplos cortos de
+                  HTML, CSS, etc.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 
+        ======================
+        PAGINACIÓN (números)
+        ======================
+        Simple, estática y muy típica de examen.
+        -->
+          <section class="card">
+            <h2 class="card-title">Paginación básica</h2>
+            <p class="card-text" style="margin-bottom: 0.75rem">
+              Menú de numeración de páginas típico (anterior / números /
+              siguiente).
+            </p>
+
+            <!-- Bloque completo de paginación -->
+            <nav class="pagination" aria-label="Paginación de ejemplo">
+              <button class="pagination-button" type="button">«</button>
+              <button
+                class="pagination-page pagination-page--active"
+                type="button"
+              >
+                1
+              </button>
+              <button class="pagination-page" type="button">2</button>
+              <button class="pagination-page" type="button">3</button>
+              <span class="pagination-ellipsis">…</span>
+              <button class="pagination-page" type="button">9</button>
+              <button class="pagination-page" type="button">10</button>
+              <button class="pagination-button" type="button">»</button>
+            </nav>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- 
+  ===========================
+  MODAL (estructura HTML)
+  ===========================
+  Esto va al final del body para que quede encima de todo.
+  Importante: el id del overlay (#modal-ejemplo) coincide con el href del botón.
+  -->
+    <div id="modal-ejemplo" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Modal muy básico</h2>
+          <!-- Enlace para cerrar el modal (vuelve a la página sin hash) -->
+          <a href="#" class="modal-close" aria-label="Cerrar">×</a>
+        </div>
+        <div class="modal-body">
+          Este modal se abre con un enlace <code>href="#modal-ejemplo"</code> y
+          se cierra con <code>href="#"</code>. No usa JavaScript, solo el
+          selector <code>:target</code> de CSS.
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-outline">Cerrar</a>
+          <a href="#" class="btn btn-primary">Aceptar</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
